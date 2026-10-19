@@ -1,0 +1,20 @@
+=================================================================
+         VPMS STATISTICAL SUMMARY & AUDIT REPORT                 
+         Generated: 2026-10-19 18:46:17
+=================================================================
+
+Total Registered Vehicles: 13
+Total Sessions Recorded  : 13
+Active Sessions          : 5
+Completed Sessions       : 8
+Total Revenue Collected  : ₹640.00
+Average Fee Per Session  : ₹80.00
+Average Duration (Hours) : 2.9 hrs
+Current Occupancy Rate   : 25.00%
+
+Revenue Breakdown by Vehicle Type:
+  - BIKE  : ₹40.00
+  - CAR   : ₹230.00
+  - TRUCK : ₹370.00
+
+=================================================================

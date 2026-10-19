@@ -1,0 +1,51 @@
+# ========================================
+# Vehicle Parking Management System
+# Git Ignore Configuration
+# ========================================
+
+# Compiled class files & Maven build
+target/
+**/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Node & Frontend dependencies
+node_modules/
+**/node_modules/
+frontend/dist/
+dist/
+dist-ssr/
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE & Tooling
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Sensitive Environment files
+.env
+.env.local
+.env.production
+
+# Exports scratch files (keep folder via .gitkeep)
+exports/*.dat
+exports/test_*
