@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Printer, CheckCircle, QrCode, CarFront } from 'lucide-react';
 import { ParkingTicket } from '../types';
+import { printElement } from '../utils/printHelper';
 
 interface TicketModalProps {
   ticket: ParkingTicket | null;
@@ -11,7 +12,7 @@ export const TicketModal: React.FC<TicketModalProps> = ({ ticket, onClose }) => 
   if (!ticket) return null;
 
   const handlePrint = () => {
-    window.print();
+    printElement('printable-ticket', `VPMS Ticket - ${ticket.ticketNumber}`);
   };
 
   const formattedDate = new Date(ticket.entryTime).toLocaleString('en-IN', {

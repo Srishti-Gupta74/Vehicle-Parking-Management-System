@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Printer, CheckCircle2, CarFront } from 'lucide-react';
 import { ParkingReceipt } from '../types';
+import { printElement } from '../utils/printHelper';
 
 interface ReceiptModalProps {
   receipt: ParkingReceipt | null;
@@ -11,7 +12,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({ receipt, onClose }) 
   if (!receipt) return null;
 
   const handlePrint = () => {
-    window.print();
+    printElement('printable-receipt', `VPMS Receipt - ${receipt.receiptNumber}`);
   };
 
   const entryDate = new Date(receipt.entryTime).toLocaleString('en-IN', {

@@ -31,63 +31,64 @@
 @media print {
   @page {
     size: auto;
-    margin: 8mm auto;
+    margin: 10mm auto;
   }
 
-  html, body {
+  html,
+  body {
     background: #ffffff !important;
     color: #0f172a !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* Hide everything on the page by default */
-  body * {
-    visibility: hidden;
+  /* Prevent ancestor containers from clipping print layout */
+  #root,
+  #root > div,
+  main {
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+    display: block !important;
+    background: #ffffff !important;
   }
 
-  /* Make only the modal overlay and printable card visible */
-  .modal-overlay,
-  .modal-overlay * {
-    visibility: visible;
+  /* Hide app chrome: sidebar, top navbar, and elements marked no-print */
+  aside,
+  header,
+  nav,
+  .no-print {
+    display: none !important;
   }
 
-  /* Neutralize modal background overlay in print */
+  /* Neutralize modal background overlay */
   .modal-overlay {
     position: static !important;
     inset: auto !important;
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
+    display: block !important;
     background: transparent !important;
     backdrop-filter: none !important;
-    padding: 10px 0 !important;
+    padding: 0 !important;
     margin: 0 auto !important;
     width: 100% !important;
-    min-height: auto !important;
   }
 
-  /* Center the printable ticket/receipt card perfectly on 1 page */
+  /* Center printable slip on single page */
   .printable-card {
     position: relative !important;
-    margin: 0 auto !important;
+    margin: 10px auto !important;
     width: 100% !important;
     max-width: 440px !important;
     background: #ffffff !important;
-    border: 1.5px solid #0f172a !important;
+    border: 1.5px dashed #64748b !important;
     border-radius: 12px !important;
     box-shadow: none !important;
-    overflow: visible !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
-  }
-
-  /* Hide modal buttons, close buttons, headers during printing */
-  .no-print,
-  .no-print * {
-    display: none !important;
-    visibility: hidden !important;
   }
 }
