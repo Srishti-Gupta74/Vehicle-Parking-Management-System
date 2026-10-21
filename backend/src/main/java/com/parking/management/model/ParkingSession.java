@@ -89,6 +89,34 @@ public class ParkingSession {
     }
 
     /**
+     * Calculates the exact elapsed duration in real-time minutes.
+     */
+    public long calculateDurationMinutes(LocalDateTime currentTime) {
+        if (entryTime == null || currentTime == null) {
+            return 1L;
+        }
+        return Math.max(1L, Duration.between(entryTime, currentTime).toMinutes());
+    }
+
+    /**
+     * Generates a human-readable real-time elapsed duration string (e.g. "9 mins", "1 hr 15 mins").
+     */
+    public String getFormattedDuration() {
+        if (entryTime == null) return "0 mins";
+        LocalDateTime end = (exitTime != null) ? exitTime : LocalDateTime.now();
+        long totalMins = Math.max(1L, Duration.between(entryTime, end).toMinutes());
+        if (totalMins < 60) {
+            return totalMins + " min" + (totalMins == 1 ? "" : "s");
+        }
+        long hrs = totalMins / 60;
+        long mins = totalMins % 60;
+        if (mins == 0) {
+            return hrs + " hr" + (hrs == 1 ? "" : "s");
+        }
+        return hrs + " hr " + mins + " min" + (mins == 1 ? "" : "s");
+    }
+
+    /**
      * Completes the parking session, records exit time, duration, and fee.
      */
     public void complete(LocalDateTime exitTime, double fee) {

@@ -57,6 +57,7 @@ public class SlotService {
 
                     long duration = sess.calculateDurationHours(now);
                     dto.setCurrentDurationHours(duration);
+                    dto.setCurrentDurationFormatted(sess.getFormattedDuration());
                     // Polymorphic fee preview:
                     dto.setCurrentEstimatedFee(v.calculateParkingFee(duration));
                 }

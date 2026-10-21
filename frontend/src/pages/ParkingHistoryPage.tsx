@@ -89,6 +89,51 @@ export const ParkingHistoryPage: React.FC = () => {
     return 0;
   });
 
+  const renderDuration = (s: ParkingSession) => {
+    if (s.status === 'ACTIVE' || !s.exitTime) {
+      const start = new Date(s.entryTime).getTime();
+      const elapsedMins = Math.max(1, Math.round((Date.now() - start) / 60000));
+      if (elapsedMins < 60) {
+        return (
+          <div>
+            <span className="text-amber-600 font-bold">{elapsedMins} min(s)</span>
+            <span className="block text-[10px] text-slate-400 font-normal">In Progress</span>
+          </div>
+        );
+      }
+      const hrs = Math.floor(elapsedMins / 60);
+      const mins = elapsedMins % 60;
+      return (
+        <div>
+          <span className="text-amber-600 font-bold">{hrs}h {mins}m</span>
+          <span className="block text-[10px] text-slate-400 font-normal">In Progress</span>
+        </div>
+      );
+    }
+
+    const start = new Date(s.entryTime).getTime();
+    const end = new Date(s.exitTime).getTime();
+    const diffMins = Math.max(1, Math.round((end - start) / 60000));
+
+    let exactText = '';
+    if (diffMins < 60) {
+      exactText = `${diffMins} min${diffMins === 1 ? '' : 's'}`;
+    } else {
+      const hrs = Math.floor(diffMins / 60);
+      const mins = diffMins % 60;
+      exactText = mins === 0 ? `${hrs} hr(s)` : `${hrs}h ${mins}m`;
+    }
+
+    return (
+      <div>
+        <span className="font-bold text-slate-900">{exactText}</span>
+        <span className="block text-[10px] text-slate-400 font-normal">
+          Billed: {s.duration || 1} hr min.
+        </span>
+      </div>
+    );
+  };
+
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
@@ -249,8 +294,8 @@ export const ParkingHistoryPage: React.FC = () => {
                           })
                         : '—'}
                     </td>
-                    <td className="px-5 py-3.5 font-semibold text-slate-700">
-                      {s.duration != null ? `${s.duration} hr(s)` : 'In Progress'}
+                    <td className="px-5 py-3.5">
+                      {renderDuration(s)}
                     </td>
                     <td className="px-5 py-3.5 font-black text-slate-900 text-sm">
                       {s.parkingFee != null ? `₹${s.parkingFee.toFixed(2)}` : 'Pending'}

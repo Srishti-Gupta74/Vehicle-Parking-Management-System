@@ -14,6 +14,8 @@ public class CheckoutResponse {
     private LocalDateTime entryTime;
     private LocalDateTime exitTime;
     private long durationHours;
+    private long durationMinutes;
+    private String formattedDuration;
     private double parkingFee;
     private String paymentMethod;
     private String paymentStatus;
@@ -99,6 +101,22 @@ public class CheckoutResponse {
 
     public void setDurationHours(long durationHours) {
         this.durationHours = durationHours;
+    }
+
+    public long getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    public void setDurationMinutes(long durationMinutes) {
+        this.durationMinutes = durationMinutes;
+    }
+
+    public String getFormattedDuration() {
+        return formattedDuration;
+    }
+
+    public void setFormattedDuration(String formattedDuration) {
+        this.formattedDuration = formattedDuration;
     }
 
     public double getParkingFee() {

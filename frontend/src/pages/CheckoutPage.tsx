@@ -202,7 +202,10 @@ export const CheckoutPage: React.FC = () => {
               <div>
                 <span className="text-slate-400 font-medium block">Duration Elapsed</span>
                 <span className="font-extrabold text-slate-900 text-base">
-                  {estimatedData.durationHours} hr(s)
+                  {estimatedData.formattedDuration || `${Math.max(1, Math.round((Date.now() - new Date(estimatedData.entryTime).getTime()) / 60000))} mins`}
+                </span>
+                <span className="text-[10px] text-slate-500 font-medium block">
+                  Billed: {estimatedData.durationHours} hr minimum rate
                 </span>
               </div>
             </div>

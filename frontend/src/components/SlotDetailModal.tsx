@@ -94,9 +94,11 @@ export const SlotDetailModal: React.FC<SlotDetailModalProps> = ({ slot, onClose 
               <div className="flex justify-between items-center">
                 <span className="text-slate-500 flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5" />
-                  <span>Duration So Far</span>
+                  <span>Duration Elapsed</span>
                 </span>
-                <span className="font-bold text-slate-800">{slot.currentDurationHours || 1} hr(s)</span>
+                <span className="font-bold text-slate-800">
+                  {slot.currentDurationFormatted || `${slot.currentDurationHours || 1} hr(s)`}
+                </span>
               </div>
 
               <div className="flex justify-between items-center pt-2 border-t border-slate-200">

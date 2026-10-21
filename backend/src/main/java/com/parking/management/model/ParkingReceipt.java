@@ -125,6 +125,22 @@ public class ParkingReceipt {
         this.durationHours = durationHours;
     }
 
+    public String getFormattedDuration() {
+        if (entryTime == null || exitTime == null) {
+            return durationHours + " hr(s)";
+        }
+        long totalMins = Math.max(1L, java.time.Duration.between(entryTime, exitTime).toMinutes());
+        if (totalMins < 60) {
+            return totalMins + " min" + (totalMins == 1 ? "" : "s");
+        }
+        long hrs = totalMins / 60;
+        long mins = totalMins % 60;
+        if (mins == 0) {
+            return hrs + " hr" + (hrs == 1 ? "" : "s");
+        }
+        return hrs + " hr " + mins + " min" + (mins == 1 ? "" : "s");
+    }
+
     public double getParkingFee() {
         return parkingFee;
     }

@@ -92,7 +92,14 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({ receipt, onClose }) 
             </div>
             <div className="flex justify-between items-center">
               <span className="text-slate-500 font-medium">Billed Duration</span>
-              <span className="font-bold text-slate-900">{receipt.durationHours} hr(s)</span>
+              <div className="text-right">
+                <span className="font-bold text-slate-900 block">
+                  {receipt.formattedDuration || `${receipt.durationHours} hr(s)`}
+                </span>
+                <span className="text-[10px] text-slate-400 font-normal">
+                  (Billed at {receipt.durationHours} hr min.)
+                </span>
+              </div>
             </div>
             <div className="flex justify-between items-center pt-2 border-t border-slate-200">
               <span className="text-slate-500 font-medium">Payment Mode</span>

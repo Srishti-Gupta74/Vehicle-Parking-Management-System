@@ -14,6 +14,7 @@ public class ParkingSlotDTO {
     private String currentVehicleType;
     private LocalDateTime currentEntryTime;
     private Long currentDurationHours;
+    private String currentDurationFormatted;
     private Double currentEstimatedFee;
 
     public ParkingSlotDTO() {}
@@ -96,6 +97,14 @@ public class ParkingSlotDTO {
 
     public void setCurrentDurationHours(Long currentDurationHours) {
         this.currentDurationHours = currentDurationHours;
+    }
+
+    public String getCurrentDurationFormatted() {
+        return currentDurationFormatted;
+    }
+
+    public void setCurrentDurationFormatted(String currentDurationFormatted) {
+        this.currentDurationFormatted = currentDurationFormatted;
     }
 
     public Double getCurrentEstimatedFee() {

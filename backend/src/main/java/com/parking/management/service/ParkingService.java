@@ -215,6 +215,8 @@ public class ParkingService {
         resp.setEntryTime(session.getEntryTime());
         resp.setExitTime(exitTime);
         resp.setDurationHours(durationHours);
+        resp.setDurationMinutes(session.calculateDurationMinutes(exitTime));
+        resp.setFormattedDuration(session.getFormattedDuration());
         resp.setParkingFee(parkingFee);
         resp.setPaymentMethod(method.name());
         resp.setPaymentStatus("PAID");
@@ -249,6 +251,8 @@ public class ParkingService {
         resp.setEntryTime(session.getEntryTime());
         resp.setExitTime(now);
         resp.setDurationHours(duration);
+        resp.setDurationMinutes(session.calculateDurationMinutes(now));
+        resp.setFormattedDuration(session.getFormattedDuration());
         resp.setParkingFee(estimatedFee);
         resp.setPaymentMethod("PENDING");
         resp.setPaymentStatus("PENDING");

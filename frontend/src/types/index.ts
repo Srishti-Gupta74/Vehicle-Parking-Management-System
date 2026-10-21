@@ -23,6 +23,7 @@ export interface ParkingSlot {
   currentVehicleType?: VehicleType;
   currentEntryTime?: string;
   currentDurationHours?: number;
+  currentDurationFormatted?: string;
   currentEstimatedFee?: number;
 }
 
@@ -38,6 +39,7 @@ export interface Vehicle {
   currentSessionId?: number;
   currentEntryTime?: string;
   currentDurationHours?: number;
+  currentDurationFormatted?: string;
   currentEstimatedFee?: number;
 }
 
@@ -48,6 +50,7 @@ export interface ParkingSession {
   entryTime: string;
   exitTime?: string;
   duration?: number;
+  formattedDuration?: string;
   parkingFee?: number;
   status: SessionStatus;
 }
@@ -75,6 +78,7 @@ export interface ParkingReceipt {
   entryTime: string;
   exitTime: string;
   durationHours: number;
+  formattedDuration?: string;
   parkingFee: number;
   paymentMethod: string;
   paymentStatus: string;
