@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
   FileText,
-  Download,
   IndianRupee,
   Car,
-  PieChart as PieIcon,
   HardDrive,
   RefreshCw,
   CheckCircle2,
-  Database,
-  FileCode,
 } from 'lucide-react';
 import { api } from '../services/api';
 import { ReportSummary } from '../types';
@@ -42,8 +38,8 @@ export const ReportsPage: React.FC = () => {
     window.location.href = url;
     setExportNotice(
       type === 'txt'
-        ? 'Generated parking_history.txt using Java FileWriter & FileReader!'
-        : 'Generated parking_backup.dat using Java FileOutputStream & FileInputStream!'
+        ? 'Audit report (parking_history.txt) generated and downloaded successfully!'
+        : 'System data backup (parking_backup.dat) generated and downloaded successfully!'
     );
     setTimeout(() => setExportNotice(null), 6000);
   };
@@ -55,7 +51,7 @@ export const ReportsPage: React.FC = () => {
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Audit Reports & File Exports</h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Statistical compilation using Java Streams and character/byte File I/O
+            Statistical compilation, financial audit summaries, and automated system exports
           </p>
         </div>
 
@@ -67,7 +63,7 @@ export const ReportsPage: React.FC = () => {
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-indigo-600' : ''}`} />
           </button>
 
-          {/* Real Export Button 1: Text Report via FileWriter */}
+          {/* Export Button 1: Text Report */}
           <button
             onClick={() => triggerDownload('txt')}
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-sm transition-colors"
@@ -76,7 +72,7 @@ export const ReportsPage: React.FC = () => {
             <span>Export Text Report (.txt)</span>
           </button>
 
-          {/* Real Export Button 2: Binary Backup via FileOutputStream */}
+          {/* Export Button 2: Binary Backup */}
           <button
             onClick={() => triggerDownload('backup')}
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold shadow-sm transition-colors"
@@ -158,9 +154,8 @@ export const ReportsPage: React.FC = () => {
           <div className="flex items-center justify-between pb-3 border-b border-slate-100">
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
               <Car className="w-4 h-4 text-indigo-600" />
-              <span>Revenue by Vehicle Hierarchy</span>
+              <span>Revenue by Vehicle Category</span>
             </h3>
-            <span className="text-xs text-slate-400 font-semibold">Subclass Overrides</span>
           </div>
 
           <div className="space-y-3">
@@ -201,7 +196,6 @@ export const ReportsPage: React.FC = () => {
               <IndianRupee className="w-4 h-4 text-emerald-600" />
               <span>Transactions by Payment Mode</span>
             </h3>
-            <span className="text-xs text-slate-400 font-semibold">Enums in Java</span>
           </div>
 
           <div className="space-y-3">
@@ -218,39 +212,6 @@ export const ReportsPage: React.FC = () => {
                 </div>
               ))}
           </div>
-        </div>
-      </div>
-
-      {/* Java File Handling Academic Breakdown */}
-      <div className="bg-gradient-to-br from-slate-900 to-indigo-950 p-6 rounded-2xl text-white shadow-xl border border-slate-800 space-y-4">
-        <div className="flex items-center gap-2 pb-3 border-b border-white/10">
-          <FileCode className="w-5 h-5 text-indigo-400" />
-          <h3 className="font-bold text-sm">CSC2104 Syllabus: Java File Handling Implementation</h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div className="bg-white/5 p-4 rounded-xl border border-white/10 space-y-1.5">
-            <h4 className="font-bold text-emerald-400">1. Character Streams (FileWriter & FileReader)</h4>
-            <p className="text-slate-300 leading-relaxed text-[11px]">
-              Implemented in <code>ParkingReportWriter.java</code>. Generates <code>exports/parking_history.txt</code> and{' '}
-              <code>exports/parking_report.txt</code> line-by-line using <code>BufferedWriter</code>, and reads back using{' '}
-              <code>BufferedReader</code> with <code>try-with-resources</code>.
-            </p>
-          </div>
-
-          <div className="bg-white/5 p-4 rounded-xl border border-white/10 space-y-1.5">
-            <h4 className="font-bold text-indigo-400">2. Byte Streams (FileOutputStream & FileInputStream)</h4>
-            <p className="text-slate-300 leading-relaxed text-[11px]">
-              Implemented in <code>ParkingBackupManager.java</code>. Generates raw binary audit file{' '}
-              <code>exports/parking_backup.dat</code> using <code>BufferedOutputStream</code> and reads byte chunks using{' '}
-              <code>FileInputStream</code> into byte arrays.
-            </p>
-          </div>
-        </div>
-
-        <div className="text-[11px] text-slate-400 flex items-center justify-between pt-2">
-          <span>Clicking the Export buttons above triggers real file creation and browser streaming.</span>
-          <span className="font-mono text-indigo-300">Target Dir: ./exports/</span>
         </div>
       </div>
     </div>
