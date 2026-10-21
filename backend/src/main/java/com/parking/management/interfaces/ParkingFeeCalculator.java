@@ -4,24 +4,16 @@ package com.parking.management.interfaces;
  * Interface demonstrating Java Abstraction and Contract Definition.
  * CSC2104 Syllabus: Interfaces, Method Overloading.
  */
+// =========================================================================
+// CSC2104 OOP CONCEPT: INTERFACE CONTRACT DEFINITION & METHOD OVERLOADING
+// 1. Pure Abstraction: Specifies behaviors without providing method bodies.
+// 2. Method Overloading: calculateParkingFee(long) and calculateParkingFee(long, double).
+// =========================================================================
 public interface ParkingFeeCalculator {
 
-    /**
-     * Calculates the parking fee based on duration in hours.
-     * Runtime polymorphism ensures subclasses (Bike, Car, Truck) provide their own implementation.
-     *
-     * @param durationHours the total duration rounded up to nearest whole hour
-     * @return the calculated fee in Rupees (₹)
-     */
+    // === CONCEPT: ABSTRACT METHOD IN INTERFACE (To be implemented by Vehicle subclasses) ===
     double calculateParkingFee(long durationHours);
 
-    /**
-     * Overloaded method supporting a discount percentage.
-     * Demonstrates Method Overloading within an interface contract.
-     *
-     * @param durationHours duration in hours
-     * @param discountPercentage discount rate (0.0 to 100.0)
-     * @return discounted fee
-     */
+    // === CONCEPT: METHOD OVERLOADING IN INTERFACE (Same name, different parameters) ===
     double calculateParkingFee(long durationHours, double discountPercentage);
 }

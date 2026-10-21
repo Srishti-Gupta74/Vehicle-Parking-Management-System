@@ -46,7 +46,10 @@ public class ParkingBackupManager {
         byte[] headerBytes = "VPMS_BACKUP_V1.0\n".getBytes(StandardCharsets.UTF_8);
         byte[] payloadBytes = backupData.getBytes(StandardCharsets.UTF_8);
 
-        // Demonstrates FileOutputStream with BufferedOutputStream
+        // =========================================================================
+        // CSC2104 OOP CONCEPT: BYTE STREAMS (BINARY I/O)
+        // Uses FileOutputStream + BufferedOutputStream for raw binary byte streams.
+        // =========================================================================
         try (FileOutputStream fos = new FileOutputStream(backupFile, false);
              BufferedOutputStream bos = new BufferedOutputStream(fos)) {
 

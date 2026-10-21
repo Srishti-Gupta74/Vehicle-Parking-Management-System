@@ -12,14 +12,20 @@ import jakarta.persistence.Entity;
  * 3. Runtime Polymorphism
  * 4. static final constants
  */
+// =========================================================================
+// CSC2104 OOP CONCEPT: HIERARCHICAL INHERITANCE & RUNTIME POLYMORPHISM
+// Vehicle (Abstract Base) -> FourWheeler (Intermediate) -> Car (Concrete)
+// Demonstrates Method Overriding (@Override) for dynamic dispatch.
+// =========================================================================
 @Entity
 @DiscriminatorValue("CAR")
 public class Car extends FourWheeler {
 
-    // Pricing rates for Car according to specification
+    // === CONCEPT: static final CONSTANTS (Car specific tariff) ===
     public static final double CAR_FIRST_HOUR_RATE = 30.0;
     public static final double CAR_ADDITIONAL_HOUR_RATE = 20.0;
 
+    // === CONCEPT: CONSTRUCTOR CHAINING (super() calls FourWheeler constructor) ===
     public Car() {
         super();
     }
@@ -32,10 +38,10 @@ public class Car extends FourWheeler {
         super(vehicleNumber, ownerName, phoneNumber, numberOfAxles);
     }
 
-    /**
-     * Polymorphic implementation of calculateParkingFee for Car.
-     * Car: First hour = ₹30, Each additional hour = ₹20.
-     */
+    // =========================================================================
+    // CSC2104 OOP CONCEPT: METHOD OVERRIDING (RUNTIME POLYMORPHISM)
+    // Dynamic binding executes this method when Vehicle reference points to Car
+    // =========================================================================
     @Override
     public double calculateParkingFee(long durationHours) {
         if (durationHours <= 1) {
@@ -49,6 +55,7 @@ public class Car extends FourWheeler {
         return "CAR";
     }
 
+    // === CONCEPT: super KEYWORD (Invokes parent method and extends behavior) ===
     @Override
     public String displayDetails() {
         return super.displayDetails() + " -> Specific: Car (First Hr: ₹30, Extra: ₹20/hr)";

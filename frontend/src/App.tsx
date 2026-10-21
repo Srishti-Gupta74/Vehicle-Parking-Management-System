@@ -38,7 +38,7 @@ const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
       case '/park':
         return { title: 'Park Vehicle', subtitle: 'Register entry and auto-assign parking slot' };
       case '/checkout':
-        return { title: 'Checkout & Settlement', subtitle: 'Calculate fees and record payment' };
+        return { title: 'Exit Booth Checkout', subtitle: 'Collect parking fees, record payment mode, and vacate slot' };
       case '/vehicles':
         return { title: 'Registered Vehicles', subtitle: 'Search vehicle database and audit lifecycle' };
       case '/history':

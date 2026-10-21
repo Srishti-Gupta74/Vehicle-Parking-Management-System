@@ -12,14 +12,20 @@ import jakarta.persistence.Entity;
  * 3. Runtime Polymorphism (when referenced as Vehicle vehicle = new Bike(...))
  * 4. static final constants
  */
+// =========================================================================
+// CSC2104 OOP CONCEPT: MULTILEVEL INHERITANCE & RUNTIME POLYMORPHISM
+// Vehicle (Level 1) -> TwoWheeler (Level 2) -> Bike (Level 3)
+// Demonstrates Method Overriding (@Override) for Bike-specific fee rate.
+// =========================================================================
 @Entity
 @DiscriminatorValue("BIKE")
 public class Bike extends TwoWheeler {
 
-    // Pricing rates for Bike according to specification
+    // === CONCEPT: static final CONSTANTS (Bike specific tariff) ===
     public static final double BIKE_FIRST_HOUR_RATE = 20.0;
     public static final double BIKE_ADDITIONAL_HOUR_RATE = 10.0;
 
+    // === CONCEPT: CONSTRUCTOR CHAINING (super() calls TwoWheeler constructor) ===
     public Bike() {
         super();
     }
@@ -32,10 +38,10 @@ public class Bike extends TwoWheeler {
         super(vehicleNumber, ownerName, phoneNumber, engineCapacityCc);
     }
 
-    /**
-     * Polymorphic implementation of calculateParkingFee for Bike.
-     * Bike: First hour = ₹20, Each additional hour = ₹10.
-     */
+    // =========================================================================
+    // CSC2104 OOP CONCEPT: METHOD OVERRIDING (RUNTIME POLYMORPHISM)
+    // Dynamic binding executes this method when Vehicle reference points to Bike
+    // =========================================================================
     @Override
     public double calculateParkingFee(long durationHours) {
         if (durationHours <= 1) {
@@ -50,6 +56,7 @@ public class Bike extends TwoWheeler {
         return "BIKE";
     }
 
+    // === CONCEPT: super KEYWORD (Invokes parent method and extends behavior) ===
     @Override
     public String displayDetails() {
         return super.displayDetails() + " -> Specific: Bike (First Hr: ₹20, Extra: ₹10/hr)";

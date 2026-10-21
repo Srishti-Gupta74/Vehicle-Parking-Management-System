@@ -19,13 +19,19 @@ import java.util.List;
  * 8. Control flow (switch, nested if, for, while, do-while, break, continue)
  * 9. Objects as parameters & Returning objects
  */
+// =========================================================================
+// CSC2104 OOP CONCEPT: COMPOSITION, 2D ARRAYS, RECURSION & NESTED CLASSES
+// - ParkingLot HAS-A 2D array grid: ParkingSlot[floor][slotIndex]
+// - Demonstrates Static Nested Classes vs Non-Static Inner Classes
+// - Synchronized thread safety during slot assignment
+// =========================================================================
 public class ParkingLot {
 
     private final String lotName;
     private final int totalFloors;
     private final int slotsPerFloor;
 
-    // Multidimensional Array representing the parking floor grid (floors x slotsPerFloor)
+    // === CONCEPT: MULTIDIMENSIONAL ARRAY (2D array representing floors and bays) ===
     private ParkingSlot[][] parkingGrid;
 
     // Static constant

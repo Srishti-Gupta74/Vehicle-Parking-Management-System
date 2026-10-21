@@ -98,14 +98,14 @@ export const CheckoutPage: React.FC = () => {
       {/* Header */}
       <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Checkout & Fee Settlement</h1>
+          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Exit Booth & Fee Collection</h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Calculate final fee via Java Runtime Polymorphism, process payment, and vacate slot
+            Cashier POS Terminal: Calculate tariff, record customer payment mode, and release parking bay
           </p>
         </div>
         <div className="px-3 py-1.5 rounded-lg bg-purple-50 border border-purple-200 text-purple-700 text-xs font-semibold flex items-center gap-1.5">
           <CreditCard className="w-4 h-4 text-purple-600" />
-          <span>Polymorphic Billing</span>
+          <span>Exit Booth POS</span>
         </div>
       </div>
 
@@ -246,13 +246,13 @@ export const CheckoutPage: React.FC = () => {
             {/* Payment Method Selector */}
             <div className="space-y-2 pt-2 border-t border-purple-100/60">
               <label className="block text-xs font-bold text-slate-700">
-                Select Payment Method <span className="text-rose-500">*</span>
+                Payment Mode Collected from Customer at Booth <span className="text-rose-500">*</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { id: 'UPI', label: 'UPI / QR', icon: Smartphone, desc: 'Instant Digital' },
-                  { id: 'CASH', label: 'Cash', icon: Banknote, desc: 'Counter Payment' },
-                  { id: 'CARD', label: 'Card', icon: CreditCard, desc: 'Debit / Credit' },
+                  { id: 'UPI', label: 'UPI / QR', icon: Smartphone, desc: 'Digital QR Scan' },
+                  { id: 'CASH', label: 'Cash', icon: Banknote, desc: 'Counter Cash Tendered' },
+                  { id: 'CARD', label: 'Card', icon: CreditCard, desc: 'POS Terminal Swipe' },
                 ].map((pm) => (
                   <div
                     key={pm.id}
@@ -289,8 +289,8 @@ export const CheckoutPage: React.FC = () => {
                 <CheckCircle2 className="w-5 h-5" />
                 <span>
                   {checkoutLoading
-                    ? 'Processing Payment & Vacating Slot...'
-                    : `Complete Checkout & Pay ₹${estimatedData.parkingFee.toFixed(2)}`}
+                    ? 'Recording Collection & Vacating Slot...'
+                    : `Confirm Collection & Vacate Slot (₹${estimatedData.parkingFee.toFixed(2)})`}
                 </span>
               </button>
             </div>

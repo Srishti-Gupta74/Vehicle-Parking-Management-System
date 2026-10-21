@@ -51,7 +51,11 @@ public class ParkingReportWriter {
         ensureExportsDirectoryExists();
         File targetFile = new File(exportsDir, "parking_history.txt");
 
-        // try-with-resources demonstrating automatic closing of character streams
+        // =========================================================================
+        // CSC2104 OOP CONCEPT: CHARACTER STREAMS & try-with-resources
+        // Uses FileWriter + BufferedWriter to write character/textual stream data.
+        // try-with-resources ensures streams auto-close, avoiding memory leaks.
+        // =========================================================================
         try (FileWriter fw = new FileWriter(targetFile, false);
              BufferedWriter bw = new BufferedWriter(fw)) {
 

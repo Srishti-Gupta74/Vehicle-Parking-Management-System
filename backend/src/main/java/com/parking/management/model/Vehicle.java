@@ -18,15 +18,21 @@ import java.time.LocalDateTime;
  * 7. final keyword (constant definitions)
  * 8. Autoboxing / Unboxing and Type Conversion
  */
+// =========================================================================
+// CSC2104 OOP CONCEPT: ABSTRACTION & INTERFACE IMPLEMENTATION
+// 1. Abstract Class: Defines common state and enforces abstract contract.
+// 2. Interfaces: Implements ParkingFeeCalculator and PrintableReceipt.
+// =========================================================================
 @Entity
 @Table(name = "vehicles")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "vehicle_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Vehicle implements ParkingFeeCalculator, PrintableReceipt {
 
-    // Final constant demonstrating the final keyword
+    // === CONCEPT: final KEYWORD (Constant definition) ===
     public static final double MINIMUM_BILLING_HOURS = 1.0;
 
+    // === CONCEPT: ENCAPSULATION (Private instance variables with getters/setters) ===
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vehicle_id")

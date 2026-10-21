@@ -89,7 +89,11 @@ public class ParkingService {
 
         ParkingSlot assignedSlot;
 
-        // 3. SYNCHRONIZED CRITICAL SECTION: Assign slot atomically
+        // =========================================================================
+        // CSC2104 OOP CONCEPT: SYNCHRONIZATION (THREAD SAFETY & CRITICAL SECTION)
+        // synchronized block acquires slotAllocationLock monitor to prevent race conditions
+        // where two threads attempt to allocate the exact same free parking slot simultaneously.
+        // =========================================================================
         synchronized (slotAllocationLock) {
             List<ParkingSlot> availableSlots = slotRepository.findBySlotTypeAndStatus(
                     requiredSlotType, SlotStatus.AVAILABLE);
@@ -159,8 +163,11 @@ public class ParkingService {
         LocalDateTime exitTime = LocalDateTime.now();
         long durationHours = session.calculateDurationHours(exitTime);
 
-        // 2. RUNTIME POLYMORPHISM: Fee calculation executes the overridden method
-        // in Bike, Car, or Truck depending on actual runtime object type!
+        // =========================================================================
+        // CSC2104 OOP CONCEPT: RUNTIME POLYMORPHISM (DYNAMIC METHOD DISPATCH)
+        // Reference type is abstract `Vehicle`, but at runtime JVM invokes the overridden
+        // calculateParkingFee() in `Bike`, `Car`, or `Truck` based on the actual object!
+        // =========================================================================
         double parkingFee = vehicle.calculateParkingFee(durationHours);
 
         // 3. Process payment method

@@ -44,8 +44,11 @@ public class ParkingRequestQueue {
         boolean slotBecameAvailable = false;
 
         try {
-            // Guard against spurious wakeups using while loop check
-            // Calling wait() releases the lock on this ParkingRequestQueue instance
+            // =========================================================================
+            // CSC2104 OOP CONCEPT: wait() INTER-THREAD COMMUNICATION
+            // Releases the monitor lock on this instance and places thread in WAITING state
+            // until notify()/notifyAll() is signaled by checkout or timeout expires.
+            // =========================================================================
             wait(timeoutMillis);
 
             long elapsed = System.currentTimeMillis() - startTime;
@@ -80,7 +83,10 @@ public class ParkingRequestQueue {
         logger.info("[Queue] Slot {} ({}) vacated! Broadcasting notifyAll() to {} waiting thread(s). Total events: {}",
                 slotNumber, slotType, waitingQueue.size(), totalWakeupEvents);
 
-        // Demonstrates notifyAll(): Awakens all threads that are waiting on this monitor
+        // =========================================================================
+        // CSC2104 OOP CONCEPT: notifyAll() INTER-THREAD NOTIFICATION
+        // Awakens all threads that called wait() on this queue monitor object
+        // =========================================================================
         notifyAll();
     }
 
