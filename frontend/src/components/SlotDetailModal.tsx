@@ -101,12 +101,12 @@ export const SlotDetailModal: React.FC<SlotDetailModalProps> = ({ slot, onClose 
                 </span>
               </div>
 
-              <div className="flex justify-between items-center pt-2 border-t border-slate-200">
+              <div className="flex justify-between items-center pt-2 border-t border-purple-100">
                 <span className="text-slate-500 flex items-center gap-1">
-                  <CreditCard className="w-3.5 h-3.5 text-indigo-500" />
+                  <CreditCard className="w-3.5 h-3.5 text-purple-600" />
                   <span>Current Estimated Fee</span>
                 </span>
-                <span className="font-extrabold text-indigo-600 text-base">
+                <span className="font-extrabold text-purple-700 text-base">
                   ₹{slot.currentEstimatedFee ? slot.currentEstimatedFee.toFixed(2) : '0.00'}
                 </span>
               </div>
@@ -122,17 +122,17 @@ export const SlotDetailModal: React.FC<SlotDetailModalProps> = ({ slot, onClose 
         </div>
 
         {/* Footer Actions */}
-        <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-end gap-3">
+        <div className="px-6 py-4 bg-purple-50/30 border-t border-purple-100 flex items-center justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-100 rounded-lg border border-slate-300 transition-colors"
+            className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 rounded-xl border border-purple-200 transition-colors"
           >
             Close
           </button>
           {isOccupied ? (
             <button
               onClick={handleCheckout}
-              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-lg shadow-sm transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-xl shadow-sm transition-colors"
             >
               <CreditCard className="w-4 h-4" />
               <span>Checkout This Vehicle</span>
@@ -141,7 +141,7 @@ export const SlotDetailModal: React.FC<SlotDetailModalProps> = ({ slot, onClose 
           ) : (
             <button
               onClick={handlePark}
-              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl shadow-sm shadow-purple-500/25 transition-all"
             >
               <Car className="w-4 h-4" />
               <span>Park Vehicle Here</span>

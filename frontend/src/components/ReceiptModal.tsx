@@ -27,9 +27,9 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({ receipt, onClose }) 
 
   return (
     <div className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-      <div className="printable-card bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200 animate-in fade-in zoom-in-95 duration-200">
+      <div className="printable-card bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-purple-100 animate-in fade-in zoom-in-95 duration-200">
         {/* Modal Window Header - Hidden in Print */}
-        <div className="no-print bg-emerald-600 px-6 py-4 flex items-center justify-between text-white">
+        <div className="no-print bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-4 flex items-center justify-between text-white">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-emerald-200" />
             <h3 className="font-bold text-base">Payment Completed</h3>
@@ -129,16 +129,16 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({ receipt, onClose }) 
         </div>
 
         {/* Modal Action Buttons - Hidden in Print */}
-        <div className="no-print px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-end gap-3">
+        <div className="no-print px-6 py-4 bg-purple-50/30 border-t border-purple-100 flex items-center justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-100 rounded-lg border border-slate-300 transition-colors"
+            className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 rounded-xl border border-purple-200 transition-colors"
           >
             Close
           </button>
           <button
             onClick={handlePrint}
-            className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-sm transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 rounded-xl shadow-sm shadow-emerald-500/25 transition-all"
           >
             <Printer className="w-4 h-4" />
             <span>Print Receipt</span>

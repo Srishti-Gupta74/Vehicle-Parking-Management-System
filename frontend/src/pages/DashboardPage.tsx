@@ -29,7 +29,7 @@ import {
 import { api } from '../services/api';
 import { DashboardStats } from '../types';
 
-const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ec4899'];
+const COLORS = ['#7c3aed', '#a855f7', '#c084fc', '#38bdf8'];
 
 export const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
@@ -61,8 +61,8 @@ export const DashboardPage: React.FC = () => {
     return (
       <div className="p-8 flex items-center justify-center min-h-[60vh]">
         <div className="flex flex-col items-center gap-3 text-slate-500">
-          <RefreshCw className="w-8 h-8 animate-spin text-indigo-600" />
-          <p className="text-xs font-semibold">Connecting to Spring Boot REST API...</p>
+          <RefreshCw className="w-8 h-8 animate-spin text-purple-600" />
+          <p className="text-xs font-semibold text-purple-900">Connecting to Spring Boot REST API...</p>
         </div>
       </div>
     );
@@ -78,7 +78,7 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto">
       {/* Top Banner with Quick Actions */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5">
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Facility Overview</h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -90,20 +90,20 @@ export const DashboardPage: React.FC = () => {
           <button
             onClick={fetchStats}
             title="Refresh Live Data"
-            className="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors"
+            className="p-2 rounded-xl border border-purple-200 text-purple-700 hover:bg-purple-50 transition-colors"
           >
             <RefreshCw className="w-4 h-4" />
           </button>
           <button
             onClick={() => navigate('/park')}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-sm transition-colors"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-sm shadow-purple-500/25 transition-all"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Park Vehicle</span>
           </button>
           <button
             onClick={() => navigate('/checkout')}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition-colors"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-semibold shadow-sm shadow-emerald-500/20 transition-all"
           >
             <CreditCard className="w-4 h-4" />
             <span>Checkout</span>
@@ -120,10 +120,10 @@ export const DashboardPage: React.FC = () => {
       {/* KPI Metric Cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Total Slots */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Total Slots</span>
-            <div className="p-1.5 rounded-lg bg-indigo-50 text-indigo-600">
+            <div className="p-1.5 rounded-lg bg-purple-50 text-purple-600">
               <Grid className="w-4 h-4" />
             </div>
           </div>
@@ -134,7 +134,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Available Slots */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Available</span>
             <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
@@ -148,7 +148,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Occupied Slots */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Occupied</span>
             <div className="p-1.5 rounded-lg bg-amber-50 text-amber-600">
@@ -164,10 +164,10 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Vehicles Parked Today */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Parked Today</span>
-            <div className="p-1.5 rounded-lg bg-blue-50 text-blue-600">
+            <div className="p-1.5 rounded-lg bg-purple-50 text-purple-600">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
@@ -178,29 +178,29 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Active Sessions */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Active Parked</span>
-            <div className="p-1.5 rounded-lg bg-purple-50 text-purple-600">
+            <div className="p-1.5 rounded-lg bg-violet-100 text-violet-700">
               <Clock className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2">
-            <span className="text-2xl font-black text-purple-600">{stats?.activeSessions ?? 0}</span>
+            <span className="text-2xl font-black text-violet-700">{stats?.activeSessions ?? 0}</span>
             <span className="text-[11px] text-slate-400 block mt-0.5">Currently inside</span>
           </div>
         </div>
 
         {/* Today's Revenue */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Today Revenue</span>
-            <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
+            <div className="p-1.5 rounded-lg bg-purple-50 text-purple-700">
               <IndianRupee className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2">
-            <span className="text-2xl font-black text-slate-900">₹{stats?.todayRevenue?.toFixed(0) ?? 0}</span>
+            <span className="text-2xl font-black text-purple-900">₹{stats?.todayRevenue?.toFixed(0) ?? 0}</span>
             <span className="text-[11px] text-slate-400 block mt-0.5">
               Total: ₹{stats?.totalRevenue?.toFixed(0) ?? 0}
             </span>
@@ -211,13 +211,13 @@ export const DashboardPage: React.FC = () => {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Revenue Over Time (Area Chart) */}
-        <div className="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+        <div className="lg:col-span-2 bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-sm font-bold text-slate-900">7-Day Revenue Trend</h3>
               <p className="text-[11px] text-slate-500">Daily parking collections in INR (₹)</p>
             </div>
-            <div className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+            <div className="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200">
               Live DB Aggregation
             </div>
           </div>
@@ -228,22 +228,22 @@ export const DashboardPage: React.FC = () => {
                 <AreaChart data={stats.weeklyRevenue} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.0} />
+                      <stop offset="5%" stopColor="#9333ea" stopOpacity={0.35} />
+                      <stop offset="95%" stopColor="#9333ea" stopOpacity={0.0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                  <XAxis dataKey="date" stroke="#94a3b8" fontSize={11} tickLine={false} />
-                  <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f3e8ff" />
+                  <XAxis dataKey="date" stroke="#a855f7" fontSize={11} tickLine={false} />
+                  <YAxis stroke="#a855f7" fontSize={11} tickLine={false} />
                   <Tooltip
                     formatter={(val: any) => [`₹${Number(val || 0).toFixed(2)}`, 'Revenue']}
-                    labelStyle={{ fontWeight: 'bold', color: '#1e293b' }}
-                    contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0' }}
+                    labelStyle={{ fontWeight: 'bold', color: '#581c87' }}
+                    contentStyle={{ borderRadius: '14px', border: '1px solid #e9d5ff', boxShadow: '0 4px 20px -2px rgba(147, 51, 234, 0.1)' }}
                   />
                   <Area
                     type="monotone"
                     dataKey="revenue"
-                    stroke="#4f46e5"
+                    stroke="#7c3aed"
                     strokeWidth={2.5}
                     fillOpacity={1}
                     fill="url(#revenueGradient)"
@@ -259,7 +259,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Vehicle Distribution (Pie Chart) */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+        <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
           <div>
             <h3 className="text-sm font-bold text-slate-900">Slot Distribution</h3>
             <p className="text-[11px] text-slate-500">Breakdown by vehicle hierarchy type</p>
@@ -296,10 +296,10 @@ export const DashboardPage: React.FC = () => {
       {/* Activity Logs & Quick Navigation */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Activity Feed */}
-        <div className="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div className="lg:col-span-2 bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
+          <div className="flex items-center justify-between pb-2 border-b border-purple-100/60">
             <div className="flex items-center gap-2">
-              <Activity className="w-4 h-4 text-indigo-600" />
+              <Activity className="w-4 h-4 text-purple-600" />
               <h3 className="text-sm font-bold text-slate-900">Live Activity Feed</h3>
             </div>
             <span className="text-[11px] text-slate-400 font-medium">Logged in MySQL table</span>
@@ -310,15 +310,15 @@ export const DashboardPage: React.FC = () => {
               stats.recentActivities.map((act) => (
                 <div
                   key={act.logId}
-                  className="flex items-start justify-between gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100/80 transition-colors border border-slate-200/60"
+                  className="flex items-start justify-between gap-3 p-3 rounded-xl bg-purple-50/30 hover:bg-purple-50/70 transition-colors border border-purple-100/60"
                 >
                   <div className="flex items-start gap-2.5">
                     <span
                       className={`px-2 py-0.5 rounded text-[10px] font-bold shrink-0 mt-0.5 ${
                         act.activityType === 'PARK'
-                          ? 'bg-indigo-100 text-indigo-700'
+                          ? 'bg-purple-100 text-purple-700 border border-purple-200'
                           : act.activityType === 'CHECKOUT'
-                          ? 'bg-emerald-100 text-emerald-700'
+                          ? 'bg-emerald-100 text-emerald-700 border border-emerald-200'
                           : 'bg-slate-200 text-slate-700'
                       }`}
                     >
@@ -338,7 +338,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Quick Navigation Cards */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-4 flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4 flex flex-col justify-between">
           <div>
             <h3 className="text-sm font-bold text-slate-900">Quick Navigation</h3>
             <p className="text-[11px] text-slate-500 mt-0.5">Fast shortcuts for live demonstration</p>
@@ -346,50 +346,50 @@ export const DashboardPage: React.FC = () => {
             <div className="space-y-2.5 mt-4">
               <button
                 onClick={() => navigate('/parking-lot')}
-                className="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/50 transition-all text-left"
+                className="w-full flex items-center justify-between p-3 rounded-xl border border-purple-100 hover:border-purple-300 hover:bg-purple-50/50 transition-all text-left"
               >
                 <div className="flex items-center gap-2.5">
-                  <Grid className="w-4 h-4 text-indigo-600" />
+                  <Grid className="w-4 h-4 text-purple-600" />
                   <div>
                     <span className="text-xs font-bold text-slate-800 block">Visual Parking Grid</span>
                     <span className="text-[11px] text-slate-500">2D array representation</span>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-slate-400" />
+                <ArrowUpRight className="w-4 h-4 text-purple-400" />
               </button>
 
               <button
                 onClick={() => navigate('/history')}
-                className="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/50 transition-all text-left"
+                className="w-full flex items-center justify-between p-3 rounded-xl border border-purple-100 hover:border-purple-300 hover:bg-purple-50/50 transition-all text-left"
               >
                 <div className="flex items-center gap-2.5">
-                  <Clock className="w-4 h-4 text-indigo-600" />
+                  <Clock className="w-4 h-4 text-purple-600" />
                   <div>
                     <span className="text-xs font-bold text-slate-800 block">Audit Parking History</span>
                     <span className="text-[11px] text-slate-500">Filter, search & print receipts</span>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-slate-400" />
+                <ArrowUpRight className="w-4 h-4 text-purple-400" />
               </button>
 
               <button
                 onClick={() => navigate('/viva-demos')}
-                className="w-full flex items-center justify-between p-3 rounded-xl border border-indigo-200 bg-indigo-50/70 hover:bg-indigo-100/70 transition-all text-left"
+                className="w-full flex items-center justify-between p-3 rounded-xl border border-purple-200 bg-purple-50/70 hover:bg-purple-100/70 transition-all text-left"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
+                  <span className="w-2 h-2 rounded-full bg-purple-600"></span>
                   <div>
-                    <span className="text-xs font-bold text-indigo-950 block">CSC2104 OOP Viva Demos</span>
-                    <span className="text-[11px] text-indigo-700">Threads, pass-by-value & GC</span>
+                    <span className="text-xs font-bold text-purple-950 block">CSC2104 OOP Viva Demos</span>
+                    <span className="text-[11px] text-purple-700">Threads, pass-by-value & GC</span>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-indigo-700" />
+                <ArrowUpRight className="w-4 h-4 text-purple-700" />
               </button>
             </div>
           </div>
 
-          <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-[11px] text-slate-500">
-            <span className="font-semibold text-slate-700 block">Backend Multithreading:</span>
+          <div className="p-3 bg-purple-50/60 rounded-xl border border-purple-100 text-[11px] text-purple-800">
+            <span className="font-semibold text-purple-950 block">Backend Multithreading:</span>
             ParkingMonitor (Thread) & SessionAuditWorker (Runnable) are running in background.
           </div>
         </div>

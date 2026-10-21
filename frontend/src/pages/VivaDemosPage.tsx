@@ -81,10 +81,10 @@ export const VivaDemosPage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <GraduationCap className="w-6 h-6 text-indigo-600" />
+            <GraduationCap className="w-6 h-6 text-purple-600" />
             <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">
               CSC2104 OOP Viva Demonstrations
             </h1>
@@ -97,7 +97,7 @@ export const VivaDemosPage: React.FC = () => {
         <button
           onClick={handleRunDemo}
           disabled={loading}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md shadow-indigo-600/30 transition-all disabled:opacity-50"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold shadow-md shadow-purple-600/30 transition-all disabled:opacity-50"
         >
           {loading ? (
             <RefreshCw className="w-4 h-4 animate-spin" />
@@ -119,8 +119,8 @@ export const VivaDemosPage: React.FC = () => {
             }}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
               selectedDemoId === d.id
-                ? 'bg-slate-900 text-white shadow-md'
-                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/25'
+                : 'bg-white text-slate-600 border border-purple-100/80 hover:bg-purple-50 hover:text-purple-700'
             }`}
           >
             {d.title}
@@ -132,9 +132,9 @@ export const VivaDemosPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Viva Q&A & Academic Reference */}
         <div className="space-y-4">
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-            <div className="pb-3 border-b border-slate-100">
-              <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-200">
+          <div className="bg-white p-6 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
+            <div className="pb-3 border-b border-purple-100/60">
+              <span className="text-[10px] font-bold text-purple-700 uppercase tracking-widest bg-purple-50 px-2.5 py-1 rounded-full border border-purple-200">
                 Viva Exam Preparation
               </span>
               <h3 className="text-base font-extrabold text-slate-900 mt-2">{currentDemo.title}</h3>
@@ -144,7 +144,7 @@ export const VivaDemosPage: React.FC = () => {
             <div className="space-y-3 text-xs">
               <div>
                 <span className="text-slate-400 font-bold block mb-1">Expected Viva Question:</span>
-                <p className="font-semibold text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <p className="font-semibold text-slate-800 bg-purple-50/40 p-3 rounded-xl border border-purple-100">
                   "{currentDemo.vivaQuestion}"
                 </p>
               </div>
@@ -156,9 +156,9 @@ export const VivaDemosPage: React.FC = () => {
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-slate-100">
+              <div className="pt-2 border-t border-purple-100/60">
                 <span className="text-slate-400 font-bold block mb-1">Source Code Class:</span>
-                <code className="text-[11px] font-mono text-indigo-700 bg-indigo-50 px-2 py-1 rounded block truncate">
+                <code className="text-[11px] font-mono text-purple-700 bg-purple-50 px-2 py-1 rounded block truncate border border-purple-200">
                   {currentDemo.file}.java
                 </code>
               </div>
@@ -167,11 +167,11 @@ export const VivaDemosPage: React.FC = () => {
         </div>
 
         {/* Live Terminal Output */}
-        <div className="lg:col-span-2 bg-slate-900 rounded-2xl shadow-xl border border-slate-800 p-5 flex flex-col justify-between overflow-hidden">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="lg:col-span-2 bg-[#120a21] rounded-2xl shadow-xl border border-purple-900/60 p-5 flex flex-col justify-between overflow-hidden">
+          <div className="flex items-center justify-between pb-3 border-b border-purple-900/40">
             <div className="flex items-center gap-2">
               <Terminal className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-mono font-bold text-slate-200">
+              <span className="text-xs font-mono font-bold text-purple-200">
                 Java Runtime Output ({currentDemo.file})
               </span>
             </div>
@@ -182,25 +182,25 @@ export const VivaDemosPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="my-4 font-mono text-xs text-emerald-400 bg-black/40 p-4 rounded-xl min-h-[360px] max-h-[460px] overflow-y-auto whitespace-pre-wrap leading-relaxed border border-slate-800/80">
+          <div className="my-4 font-mono text-xs text-emerald-400 bg-black/50 p-4 rounded-xl min-h-[360px] max-h-[460px] overflow-y-auto whitespace-pre-wrap leading-relaxed border border-purple-900/40">
             {loading ? (
-              <div className="flex items-center gap-2 text-slate-400">
+              <div className="flex items-center gap-2 text-purple-300">
                 <RefreshCw className="w-4 h-4 animate-spin text-emerald-400" />
                 <span>Invoking {currentDemo.file}.executeAndCapture() in JVM...</span>
               </div>
             ) : output ? (
               output
             ) : (
-              <div className="text-slate-500 space-y-2">
+              <div className="text-purple-300/60 space-y-2">
                 <p>Click "Run Live Demonstration" above to execute this code inside the running Spring Boot backend.</p>
-                <p className="text-slate-600 text-[11px]">
+                <p className="text-purple-400/50 text-[11px]">
                   Output captures real System.out / string builder execution verifying the OOP syllabus in runtime.
                 </p>
               </div>
             )}
           </div>
 
-          <div className="flex items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-slate-800">
+          <div className="flex items-center justify-between text-[11px] text-purple-400/60 pt-2 border-t border-purple-900/40">
             <span>Executable via console: java -cp target/classes {currentDemo.file}</span>
             <span className="text-emerald-400 font-mono">JDK 21 LTS</span>
           </div>

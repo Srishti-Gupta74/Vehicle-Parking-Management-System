@@ -43,7 +43,7 @@ const ToastItem: React.FC<{ toast: ToastMessage; onDismiss: (id: string) => void
       icon: AlertCircle,
     },
     info: {
-      bg: 'bg-indigo-600',
+      bg: 'bg-purple-600',
       icon: Info,
     },
   }[toast.type];
@@ -51,7 +51,7 @@ const ToastItem: React.FC<{ toast: ToastMessage; onDismiss: (id: string) => void
   const Icon = config.icon;
 
   return (
-    <div className="pointer-events-auto flex items-center justify-between gap-3 p-3.5 rounded-xl shadow-lg text-white font-medium text-xs bg-slate-900 border border-slate-700 animate-in slide-in-from-bottom-2 duration-200">
+    <div className="pointer-events-auto flex items-center justify-between gap-3 p-3.5 rounded-xl shadow-xl text-white font-medium text-xs bg-[#180e2e] border border-purple-900/60 animate-in slide-in-from-bottom-2 duration-200">
       <div className="flex items-center gap-2.5">
         <div className={`p-1 rounded-lg ${config.bg}`}>
           <Icon className="w-4 h-4 text-white" />
@@ -60,7 +60,7 @@ const ToastItem: React.FC<{ toast: ToastMessage; onDismiss: (id: string) => void
       </div>
       <button
         onClick={() => onDismiss(toast.id)}
-        className="p-1 text-slate-400 hover:text-white rounded-lg transition-colors shrink-0"
+        className="p-1 text-purple-300 hover:text-white rounded-lg transition-colors shrink-0"
       >
         <X className="w-4 h-4" />
       </button>

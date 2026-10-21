@@ -47,7 +47,7 @@ export const ReportsPage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Audit Reports & File Exports</h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -58,15 +58,15 @@ export const ReportsPage: React.FC = () => {
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             onClick={fetchReport}
-            className="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors"
+            className="p-2 rounded-xl border border-purple-200 text-purple-700 hover:bg-purple-50 transition-colors"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-indigo-600' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-purple-600' : ''}`} />
           </button>
 
           {/* Export Button 1: Text Report */}
           <button
             onClick={() => triggerDownload('txt')}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-sm transition-colors"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-sm shadow-purple-500/25 transition-all"
           >
             <FileText className="w-4 h-4" />
             <span>Export Text Report (.txt)</span>
@@ -75,7 +75,7 @@ export const ReportsPage: React.FC = () => {
           {/* Export Button 2: Binary Backup */}
           <button
             onClick={() => triggerDownload('backup')}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold shadow-sm transition-colors"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-purple-950 hover:bg-purple-900 text-white text-xs font-semibold shadow-sm transition-all"
           >
             <HardDrive className="w-4 h-4" />
             <span>Export Binary Backup (.dat)</span>
@@ -98,11 +98,11 @@ export const ReportsPage: React.FC = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+        <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
             Total Revenue Collected
           </span>
-          <span className="text-2xl font-black text-indigo-600 mt-2 block">
+          <span className="text-2xl font-black text-purple-700 mt-2 block">
             ₹{report?.totalRevenue?.toFixed(2) ?? '0.00'}
           </span>
           <span className="text-[11px] text-slate-400 mt-1 block">
@@ -110,7 +110,7 @@ export const ReportsPage: React.FC = () => {
           </span>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+        <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
             Total Sessions Handled
           </span>
@@ -122,7 +122,7 @@ export const ReportsPage: React.FC = () => {
           </span>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+        <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
             Registered Vehicles
           </span>
@@ -134,7 +134,7 @@ export const ReportsPage: React.FC = () => {
           </span>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+        <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
             Average Parking Duration
           </span>
@@ -150,10 +150,10 @@ export const ReportsPage: React.FC = () => {
       {/* Revenue & Distribution Breakdown */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Revenue by Vehicle Category */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div className="bg-white p-6 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-purple-100/60">
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <Car className="w-4 h-4 text-indigo-600" />
+              <Car className="w-4 h-4 text-purple-600" />
               <span>Revenue by Vehicle Category</span>
             </h3>
           </div>
@@ -163,16 +163,16 @@ export const ReportsPage: React.FC = () => {
               Object.entries(report.revenueByType).map(([type, amount]) => (
                 <div
                   key={type}
-                  className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs"
+                  className="flex items-center justify-between p-3 rounded-xl bg-purple-50/30 border border-purple-100 text-xs"
                 >
                   <div className="flex items-center gap-2">
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                         type === 'BIKE'
-                          ? 'bg-blue-100 text-blue-800'
+                          ? 'bg-violet-100 text-violet-800'
                           : type === 'CAR'
-                          ? 'bg-indigo-100 text-indigo-800'
-                          : 'bg-amber-100 text-amber-800'
+                          ? 'bg-purple-100 text-purple-800'
+                          : 'bg-indigo-100 text-indigo-800'
                       }`}
                     >
                       {type}
@@ -181,7 +181,7 @@ export const ReportsPage: React.FC = () => {
                       {report.vehicleCountsByType[type] || 0} vehicle(s)
                     </span>
                   </div>
-                  <span className="font-extrabold text-slate-900 text-sm">
+                  <span className="font-extrabold text-purple-900 text-sm">
                     ₹{amount.toFixed(2)}
                   </span>
                 </div>
@@ -190,10 +190,10 @@ export const ReportsPage: React.FC = () => {
         </div>
 
         {/* Sessions by Payment Method */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div className="bg-white p-6 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-purple-100/60">
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <IndianRupee className="w-4 h-4 text-emerald-600" />
+              <IndianRupee className="w-4 h-4 text-purple-600" />
               <span>Transactions by Payment Mode</span>
             </h3>
           </div>
@@ -203,10 +203,10 @@ export const ReportsPage: React.FC = () => {
               Object.entries(report.sessionsByPaymentMethod).map(([method, count]) => (
                 <div
                   key={method}
-                  className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs"
+                  className="flex items-center justify-between p-3 rounded-xl bg-purple-50/30 border border-purple-100 text-xs"
                 >
                   <span className="font-bold text-slate-800">{method}</span>
-                  <span className="px-3 py-1 rounded-full font-bold text-slate-700 bg-white border border-slate-200">
+                  <span className="px-3 py-1 rounded-full font-bold text-purple-800 bg-purple-50 border border-purple-200">
                     {count} transactions
                   </span>
                 </div>

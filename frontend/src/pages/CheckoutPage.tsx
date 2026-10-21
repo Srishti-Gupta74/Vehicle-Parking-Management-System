@@ -96,15 +96,15 @@ export const CheckoutPage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+      <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex items-center justify-between">
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Checkout & Fee Settlement</h1>
           <p className="text-xs text-slate-500 mt-0.5">
             Calculate final fee via Java Runtime Polymorphism, process payment, and vacate slot
           </p>
         </div>
-        <div className="px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold flex items-center gap-1.5">
-          <CreditCard className="w-4 h-4" />
+        <div className="px-3 py-1.5 rounded-lg bg-purple-50 border border-purple-200 text-purple-700 text-xs font-semibold flex items-center gap-1.5">
+          <CreditCard className="w-4 h-4 text-purple-600" />
           <span>Polymorphic Billing</span>
         </div>
       </div>
@@ -117,26 +117,26 @@ export const CheckoutPage: React.FC = () => {
       )}
 
       {/* Search Input Box */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+      <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-3">
         <label className="block text-xs font-bold text-slate-700">
           Search Active Vehicle by Registration Number
         </label>
         <div className="flex gap-2">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3.5 top-3 text-purple-400" />
             <input
               type="text"
               value={vehicleNumber}
               onChange={(e) => setVehicleNumber(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               placeholder="e.g. KA-05-MJ-4321 or KA-01-AB-1234"
-              className="w-full pl-10 pr-4 py-2.5 text-xs font-mono font-bold rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 uppercase tracking-wider"
+              className="w-full pl-10 pr-4 py-2.5 text-xs font-mono font-bold rounded-xl border border-purple-200/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 uppercase tracking-wider bg-white"
             />
           </div>
           <button
             onClick={() => handleSearch()}
             disabled={loading}
-            className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition-all disabled:opacity-50 flex items-center gap-1.5"
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold shadow-sm shadow-purple-500/25 transition-all disabled:opacity-50 flex items-center gap-1.5"
           >
             {loading ? 'Searching...' : 'Calculate Fee'}
           </button>
@@ -157,7 +157,7 @@ export const CheckoutPage: React.FC = () => {
                     setVehicleNumber(s.vehicle.vehicleNumber);
                     handleSearch(s.vehicle.vehicleNumber);
                   }}
-                  className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 text-[11px] font-mono font-bold text-slate-700 transition-colors"
+                  className="px-2.5 py-1 rounded-lg bg-purple-50/50 hover:bg-purple-100/70 hover:text-purple-700 border border-purple-200/70 text-[11px] font-mono font-bold text-purple-900 transition-colors"
                 >
                   {s.vehicle.vehicleNumber} ({s.slot.slotNumber})
                 </button>
@@ -170,19 +170,19 @@ export const CheckoutPage: React.FC = () => {
       {/* Parking Summary & Payment Card */}
       {estimatedData && (
         <form onSubmit={handleCheckoutSubmit} className="space-y-6">
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="bg-white p-6 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-purple-100/60">
               <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <Car className="w-4 h-4 text-indigo-600" />
+                <Car className="w-4 h-4 text-purple-600" />
                 <span>Parking Summary for {estimatedData.vehicleNumber}</span>
               </h2>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200">
                 Active Session #{estimatedData.sessionId}
               </span>
             </div>
 
             {/* Details Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-xl bg-purple-50/30 border border-purple-100 text-xs">
               <div>
                 <span className="text-slate-400 font-medium block">Vehicle Type</span>
                 <span className="font-bold text-slate-800 text-sm">{estimatedData.vehicleType}</span>
@@ -195,7 +195,7 @@ export const CheckoutPage: React.FC = () => {
               </div>
               <div>
                 <span className="text-slate-400 font-medium block">Assigned Slot</span>
-                <span className="font-extrabold text-indigo-600 text-base">
+                <span className="font-extrabold text-purple-700 text-base">
                   {estimatedData.slotNumber} (Floor {estimatedData.floor})
                 </span>
               </div>
@@ -204,7 +204,7 @@ export const CheckoutPage: React.FC = () => {
                 <span className="font-extrabold text-slate-900 text-base">
                   {estimatedData.formattedDuration || `${Math.max(1, Math.round((Date.now() - new Date(estimatedData.entryTime).getTime()) / 60000))} mins`}
                 </span>
-                <span className="text-[10px] text-slate-500 font-medium block">
+                <span className="text-[10px] text-purple-600 font-medium block">
                   Billed: {estimatedData.durationHours} hr minimum rate
                 </span>
               </div>
@@ -227,24 +227,24 @@ export const CheckoutPage: React.FC = () => {
             </div>
 
             {/* Total Fee Highlight */}
-            <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-500/10 to-emerald-500/10 border border-indigo-200 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-gradient-to-r from-purple-500/10 via-purple-600/10 to-indigo-500/10 border border-purple-200 flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block">
+                <span className="text-xs font-bold text-purple-900 uppercase tracking-wider block">
                   Final Calculated Parking Fee
                 </span>
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-purple-700">
                   Calculated dynamically in Java: {estimatedData.vehicleType}.calculateParkingFee({estimatedData.durationHours})
                 </span>
               </div>
               <div className="text-right">
-                <span className="text-3xl font-black text-indigo-600">
+                <span className="text-3xl font-black text-purple-700">
                   ₹{estimatedData.parkingFee.toFixed(2)}
                 </span>
               </div>
             </div>
 
             {/* Payment Method Selector */}
-            <div className="space-y-2 pt-2 border-t border-slate-100">
+            <div className="space-y-2 pt-2 border-t border-purple-100/60">
               <label className="block text-xs font-bold text-slate-700">
                 Select Payment Method <span className="text-rose-500">*</span>
               </label>
@@ -259,13 +259,13 @@ export const CheckoutPage: React.FC = () => {
                     onClick={() => setPaymentMethod(pm.id as any)}
                     className={`p-3 rounded-xl border-2 cursor-pointer transition-all flex items-center gap-3 ${
                       paymentMethod === pm.id
-                        ? 'border-emerald-600 bg-emerald-50/70 shadow-sm'
-                        : 'border-slate-200 hover:border-slate-300 bg-slate-50/50'
+                        ? 'border-purple-600 bg-purple-50/70 shadow-sm shadow-purple-500/10'
+                        : 'border-purple-100/80 hover:border-purple-200 bg-purple-50/20'
                     }`}
                   >
                     <div
                       className={`p-2 rounded-lg ${
-                        paymentMethod === pm.id ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'
+                        paymentMethod === pm.id ? 'bg-purple-600 text-white' : 'bg-slate-200 text-slate-600'
                       }`}
                     >
                       <pm.icon className="w-4 h-4" />
@@ -284,7 +284,7 @@ export const CheckoutPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={checkoutLoading}
-                className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-800 text-white font-bold text-sm shadow-lg shadow-purple-600/30 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 <CheckCircle2 className="w-5 h-5" />
                 <span>

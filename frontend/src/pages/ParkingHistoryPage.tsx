@@ -137,7 +137,7 @@ export const ParkingHistoryPage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Parking Session Audit History</h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -148,30 +148,30 @@ export const ParkingHistoryPage: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={fetchHistory}
-            className="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors"
+            className="p-2 rounded-xl border border-purple-200 text-purple-700 hover:bg-purple-50 transition-colors"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-indigo-600' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-purple-600' : ''}`} />
           </button>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex flex-wrap items-center justify-between gap-3 text-xs">
         {/* Search */}
         <form onSubmit={handleSearchSubmit} className="flex gap-2 flex-1 min-w-[240px]">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-2.5 text-purple-400" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search plate, owner, or slot..."
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-purple-200/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
             />
           </div>
           <button
             type="submit"
-            className="px-3 py-1.5 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors"
+            className="px-3.5 py-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-sm shadow-purple-500/25 transition-all"
           >
             Filter
           </button>
@@ -185,7 +185,7 @@ export const ParkingHistoryPage: React.FC = () => {
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-2.5 py-1.5 rounded-xl border border-purple-200/90 bg-white font-semibold text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               <option value="ALL">All Status</option>
               <option value="ACTIVE">ACTIVE</option>
@@ -199,7 +199,7 @@ export const ParkingHistoryPage: React.FC = () => {
             <select
               value={vehicleType}
               onChange={(e) => setVehicleType(e.target.value)}
-              className="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-2.5 py-1.5 rounded-xl border border-purple-200/90 bg-white font-semibold text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               <option value="ALL">All Types</option>
               <option value="BIKE">BIKE</option>
@@ -214,7 +214,7 @@ export const ParkingHistoryPage: React.FC = () => {
             <select
               value={sortField}
               onChange={(e) => setSortField(e.target.value as any)}
-              className="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-2.5 py-1.5 rounded-xl border border-purple-200/90 bg-white font-semibold text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               <option value="entryTime">Entry Time</option>
               <option value="fee">Parking Fee</option>
@@ -222,20 +222,20 @@ export const ParkingHistoryPage: React.FC = () => {
             </select>
             <button
               onClick={() => setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc')}
-              className="p-1.5 rounded-lg border border-slate-300 hover:bg-slate-50 transition-colors"
+              className="p-1.5 rounded-xl border border-purple-200 hover:bg-purple-50 transition-colors"
               title="Toggle sort direction"
             >
-              <ArrowUpDown className="w-3.5 h-3.5 text-slate-600" />
+              <ArrowUpDown className="w-3.5 h-3.5 text-purple-700" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase tracking-wider font-semibold text-[11px]">
+            <thead className="bg-purple-50/50 border-b border-purple-100/80 text-purple-900/70 uppercase tracking-wider font-semibold text-[11px]">
               <tr>
                 <th className="px-5 py-3.5">ID</th>
                 <th className="px-5 py-3.5">Vehicle</th>
@@ -249,11 +249,11 @@ export const ParkingHistoryPage: React.FC = () => {
                 <th className="px-5 py-3.5 text-right">Documents</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-purple-100/50">
               {sortedSessions.length > 0 ? (
                 sortedSessions.map((s) => (
-                  <tr key={s.sessionId} className="hover:bg-slate-50/70 transition-colors">
-                    <td className="px-5 py-3.5 font-mono text-slate-400">#{s.sessionId}</td>
+                  <tr key={s.sessionId} className="hover:bg-purple-50/30 transition-colors">
+                    <td className="px-5 py-3.5 font-mono text-purple-400">#{s.sessionId}</td>
                     <td className="px-5 py-3.5 font-mono font-bold text-slate-900">
                       {s.vehicle.vehicleNumber}
                       <span className="block text-[11px] font-sans font-normal text-slate-500">
@@ -262,12 +262,12 @@ export const ParkingHistoryPage: React.FC = () => {
                     </td>
                     <td className="px-5 py-3.5">
                       <span
-                        className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                        className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                           s.vehicle.vehicleType === 'BIKE'
-                            ? 'bg-blue-50 text-blue-700'
+                            ? 'bg-violet-50 text-violet-700 border border-violet-200'
                             : s.vehicle.vehicleType === 'CAR'
-                            ? 'bg-indigo-50 text-indigo-700'
-                            : 'bg-amber-50 text-amber-700'
+                            ? 'bg-purple-50 text-purple-700 border border-purple-200'
+                            : 'bg-indigo-50 text-indigo-700 border border-indigo-200'
                         }`}
                       >
                         {s.vehicle.vehicleType}
@@ -297,7 +297,7 @@ export const ParkingHistoryPage: React.FC = () => {
                     <td className="px-5 py-3.5">
                       {renderDuration(s)}
                     </td>
-                    <td className="px-5 py-3.5 font-black text-slate-900 text-sm">
+                    <td className="px-5 py-3.5 font-black text-purple-900 text-sm">
                       {s.parkingFee != null ? `₹${s.parkingFee.toFixed(2)}` : 'Pending'}
                     </td>
                     <td className="px-5 py-3.5">
@@ -315,7 +315,7 @@ export const ParkingHistoryPage: React.FC = () => {
                       <button
                         onClick={() => handleViewTicket(s.sessionId)}
                         title="View Entry Ticket"
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold text-[11px] transition-colors"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-700 font-semibold text-[11px] transition-colors border border-purple-200"
                       >
                         <Ticket className="w-3.5 h-3.5" />
                         <span>Ticket</span>
@@ -324,7 +324,7 @@ export const ParkingHistoryPage: React.FC = () => {
                         <button
                           onClick={() => handleViewReceipt(s.sessionId)}
                           title="View Tax Receipt"
-                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold text-[11px] transition-colors"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold text-[11px] transition-colors border border-emerald-200"
                         >
                           <Receipt className="w-3.5 h-3.5" />
                           <span>Receipt</span>

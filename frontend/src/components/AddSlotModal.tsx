@@ -42,8 +42,8 @@ export const AddSlotModal: React.FC<AddSlotModalProps> = ({ isOpen, onClose, onS
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200 animate-in fade-in zoom-in-95 duration-200">
-        <div className="px-6 py-4 bg-indigo-600 flex items-center justify-between text-white">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-purple-100 animate-in fade-in zoom-in-95 duration-200">
+        <div className="px-6 py-4 bg-gradient-to-r from-purple-700 to-indigo-700 flex items-center justify-between text-white">
           <div className="flex items-center gap-2">
             <Plus className="w-5 h-5" />
             <h3 className="font-bold text-base">Add New Parking Slot</h3>
@@ -58,7 +58,7 @@ export const AddSlotModal: React.FC<AddSlotModalProps> = ({ isOpen, onClose, onS
 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {error && (
-            <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-lg flex items-center gap-2">
+            <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -74,7 +74,7 @@ export const AddSlotModal: React.FC<AddSlotModalProps> = ({ isOpen, onClose, onS
               placeholder="e.g. C-09 or B-09 or T-05"
               value={slotNumber}
               onChange={(e) => setSlotNumber(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-medium rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 uppercase"
+              className="w-full px-3 py-2 text-xs font-medium rounded-xl border border-purple-200/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 uppercase"
             />
             <p className="text-[11px] text-slate-400 mt-1">Must be unique across the facility</p>
           </div>
@@ -86,7 +86,7 @@ export const AddSlotModal: React.FC<AddSlotModalProps> = ({ isOpen, onClose, onS
             <select
               value={slotType}
               onChange={(e) => setSlotType(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-medium rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 text-xs font-medium rounded-xl border border-purple-200/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
             >
               <option value="BIKE">BIKE (Two-Wheeler)</option>
               <option value="CAR">CAR (Four-Wheeler)</option>
@@ -105,22 +105,22 @@ export const AddSlotModal: React.FC<AddSlotModalProps> = ({ isOpen, onClose, onS
               required
               value={floor}
               onChange={(e) => setFloor(parseInt(e.target.value) || 1)}
-              className="w-full px-3 py-2 text-xs font-medium rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 text-xs font-medium rounded-xl border border-purple-200/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
             />
           </div>
 
-          <div className="pt-3 border-t border-slate-200 flex items-center justify-end gap-3">
+          <div className="pt-3 border-t border-purple-100 flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-100 rounded-lg border border-slate-300 transition-colors"
+              className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 rounded-xl border border-purple-200 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition-colors disabled:opacity-50 flex items-center gap-1.5"
+              className="px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl shadow-sm shadow-purple-500/25 transition-all disabled:opacity-50 flex items-center gap-1.5"
             >
               <Plus className="w-4 h-4" />
               <span>{loading ? 'Creating...' : 'Create Slot'}</span>

@@ -22,11 +22,11 @@ export const TicketModal: React.FC<TicketModalProps> = ({ ticket, onClose }) => 
 
   return (
     <div className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-      <div className="printable-card bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200 animate-in fade-in zoom-in-95 duration-200">
+      <div className="printable-card bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-purple-100 animate-in fade-in zoom-in-95 duration-200">
         {/* Modal Window Header - Hidden in Print */}
-        <div className="no-print bg-indigo-600 px-6 py-4 flex items-center justify-between text-white">
+        <div className="no-print bg-gradient-to-r from-purple-700 to-indigo-700 px-6 py-4 flex items-center justify-between text-white">
           <div className="flex items-center gap-2">
-            <CheckCircle className="w-5 h-5 text-emerald-300" />
+            <CheckCircle className="w-5 h-5 text-purple-200" />
             <h3 className="font-bold text-base">Vehicle Parked Successfully</h3>
           </div>
           <button
@@ -43,10 +43,10 @@ export const TicketModal: React.FC<TicketModalProps> = ({ ticket, onClose }) => 
           {/* Header */}
           <div className="text-center border-b border-dashed border-slate-300 pb-3">
             <div className="flex items-center justify-center gap-1.5 mb-1.5">
-              <CarFront className="w-5 h-5 text-indigo-600" />
+              <CarFront className="w-5 h-5 text-purple-600" />
               <span className="font-black tracking-wide text-slate-900 text-base">VPMS PARKING</span>
             </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200">
               Official Parking Ticket
             </span>
             <h2 className="text-lg font-extrabold text-slate-900 mt-1.5">Central Parking Facility</h2>
@@ -56,7 +56,7 @@ export const TicketModal: React.FC<TicketModalProps> = ({ ticket, onClose }) => 
           </div>
 
           {/* Details Table */}
-          <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200/90 space-y-2 text-xs">
+          <div className="bg-purple-50/30 rounded-xl p-3.5 border border-purple-100 space-y-2 text-xs">
             <div className="flex justify-between items-center">
               <span className="text-slate-500 font-medium">Vehicle Registration</span>
               <span className="font-mono font-black text-slate-950 text-sm tracking-wide">
@@ -65,7 +65,7 @@ export const TicketModal: React.FC<TicketModalProps> = ({ ticket, onClose }) => 
             </div>
             <div className="flex justify-between items-center">
               <span className="text-slate-500 font-medium">Vehicle Type</span>
-              <span className="px-2 py-0.5 rounded font-bold text-[11px] bg-indigo-100 text-indigo-800">
+              <span className="px-2 py-0.5 rounded-full font-bold text-[11px] bg-purple-100 text-purple-800 border border-purple-200">
                 {ticket.vehicleType}
               </span>
             </div>
@@ -73,25 +73,25 @@ export const TicketModal: React.FC<TicketModalProps> = ({ ticket, onClose }) => 
               <span className="text-slate-500 font-medium">Driver / Owner</span>
               <span className="font-semibold text-slate-900">{ticket.ownerName}</span>
             </div>
-            <div className="flex justify-between items-center pt-2 border-t border-slate-200">
+            <div className="flex justify-between items-center pt-2 border-t border-purple-100">
               <span className="text-slate-500 font-medium">Assigned Parking Bay</span>
               <div className="text-right">
-                <span className="font-black text-indigo-600 text-base tracking-wide">
+                <span className="font-black text-purple-700 text-base tracking-wide">
                   {ticket.slotNumber}
                 </span>
-                <span className="text-[11px] text-slate-500 font-medium block">
+                <span className="text-[11px] text-purple-600/70 font-medium block">
                   Level / Floor {ticket.floor}
                 </span>
               </div>
             </div>
-            <div className="flex justify-between items-center pt-2 border-t border-slate-200">
+            <div className="flex justify-between items-center pt-2 border-t border-purple-100">
               <span className="text-slate-500 font-medium">Entry Timestamp</span>
               <span className="font-semibold text-slate-900">{formattedDate}</span>
             </div>
           </div>
 
           {/* QR Verification Box */}
-          <div className="flex flex-col items-center justify-center p-2.5 bg-white rounded-xl border border-slate-200">
+          <div className="flex flex-col items-center justify-center p-2.5 bg-white rounded-xl border border-purple-100">
             <QrCode className="w-14 h-14 text-slate-800" />
             <p className="text-[9px] text-slate-500 font-mono mt-1 tracking-widest uppercase font-semibold">
               SCAN AT EXIT COUNTER FOR PAYMENT
@@ -106,16 +106,16 @@ export const TicketModal: React.FC<TicketModalProps> = ({ ticket, onClose }) => 
         </div>
 
         {/* Modal Action Buttons - Hidden in Print */}
-        <div className="no-print px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-end gap-3">
+        <div className="no-print px-6 py-4 bg-purple-50/30 border-t border-purple-100 flex items-center justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-100 rounded-lg border border-slate-300 transition-colors"
+            className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 rounded-xl border border-purple-200 transition-colors"
           >
             Done
           </button>
           <button
             onClick={handlePrint}
-            className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl shadow-sm shadow-purple-500/25 transition-all"
           >
             <Printer className="w-4 h-4" />
             <span>Print Ticket</span>

@@ -55,7 +55,7 @@ const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   const { title, subtitle } = getPageInfo();
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-[#faf8fd]">
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         <Navbar title={title} subtitle={subtitle} />

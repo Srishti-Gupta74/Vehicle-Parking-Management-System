@@ -93,7 +93,7 @@ export const SlotManagementPage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Slot Management</h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -104,13 +104,13 @@ export const SlotManagementPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={fetchSlots}
-            className="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors"
+            className="p-2 rounded-xl border border-purple-200 text-purple-700 hover:bg-purple-50 transition-colors"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-indigo-600' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-purple-600' : ''}`} />
           </button>
           <button
             onClick={() => setIsAddOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-sm transition-colors"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-sm shadow-purple-500/25 transition-all"
           >
             <Plus className="w-4 h-4" />
             <span>Add New Slot</span>
@@ -134,14 +134,14 @@ export const SlotManagementPage: React.FC = () => {
       )}
 
       {/* Filter Toolbar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <span className="text-slate-400 font-semibold uppercase text-[11px]">Type:</span>
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-2.5 py-1.5 rounded-lg border border-purple-200 font-semibold text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               <option value="ALL">All Types</option>
               <option value="BIKE">BIKE</option>
@@ -155,7 +155,7 @@ export const SlotManagementPage: React.FC = () => {
             <select
               value={filterFloor}
               onChange={(e) => setFilterFloor(e.target.value)}
-              className="px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-2.5 py-1.5 rounded-lg border border-purple-200 font-semibold text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               <option value="ALL">All Floors</option>
               <option value="1">Floor 1</option>
@@ -170,10 +170,10 @@ export const SlotManagementPage: React.FC = () => {
       </div>
 
       {/* Slots Table */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase tracking-wider font-semibold text-[11px]">
+            <thead className="bg-purple-50/50 border-b border-purple-100/80 text-purple-900/70 uppercase tracking-wider font-semibold text-[11px]">
               <tr>
                 <th className="px-5 py-3.5">Slot Number</th>
                 <th className="px-5 py-3.5">Compatible Type</th>
@@ -183,23 +183,23 @@ export const SlotManagementPage: React.FC = () => {
                 <th className="px-5 py-3.5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-purple-100/50">
               {filteredSlots.length > 0 ? (
                 filteredSlots.map((slot) => {
                   const isOccupied = slot.status === 'OCCUPIED';
                   return (
-                    <tr key={slot.slotId} className="hover:bg-slate-50/70 transition-colors">
-                      <td className="px-5 py-3.5 font-bold font-mono text-slate-900 text-sm">
+                    <tr key={slot.slotId} className="hover:bg-purple-50/30 transition-colors">
+                      <td className="px-5 py-3.5 font-bold font-mono text-purple-950 text-sm">
                         {slot.slotNumber}
                       </td>
                       <td className="px-5 py-3.5">
                         <span
                           className={`px-2.5 py-0.5 rounded-full font-bold text-[10px] ${
                             slot.slotType === 'BIKE'
-                              ? 'bg-blue-50 text-blue-700'
+                              ? 'bg-violet-50 text-violet-700 border border-violet-200'
                               : slot.slotType === 'CAR'
-                              ? 'bg-indigo-50 text-indigo-700'
-                              : 'bg-amber-50 text-amber-700'
+                              ? 'bg-purple-50 text-purple-700 border border-purple-200'
+                              : 'bg-indigo-50 text-indigo-700 border border-indigo-200'
                           }`}
                         >
                           {slot.slotType}
@@ -231,7 +231,7 @@ export const SlotManagementPage: React.FC = () => {
                       <td className="px-5 py-3.5 text-right space-x-2">
                         <button
                           onClick={() => handleToggleStatus(slot)}
-                          className="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-[11px] transition-colors"
+                          className="px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-800 font-semibold text-[11px] transition-colors border border-purple-200"
                         >
                           Toggle Status
                         </button>
