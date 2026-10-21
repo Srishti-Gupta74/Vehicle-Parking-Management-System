@@ -9,7 +9,6 @@ import {
   History,
   Settings2,
   FileText,
-  GraduationCap,
   LogOut,
   ShieldCheck,
 } from 'lucide-react';
@@ -24,7 +23,6 @@ const navigation = [
   { name: 'Parking History', href: '/history', icon: History },
   { name: 'Slot Management', href: '/slots', icon: Settings2 },
   { name: 'Reports & Export', href: '/reports', icon: FileText },
-  { name: 'OOP Viva Demos', href: '/viva-demos', icon: GraduationCap },
 ];
 
 export const Sidebar: React.FC = () => {

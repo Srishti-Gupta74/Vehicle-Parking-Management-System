@@ -12,7 +12,6 @@ import { VehiclesPage } from './pages/VehiclesPage';
 import { ParkingHistoryPage } from './pages/ParkingHistoryPage';
 import { SlotManagementPage } from './pages/SlotManagementPage';
 import { ReportsPage } from './pages/ReportsPage';
-import { VivaDemosPage } from './pages/VivaDemosPage';
 
 const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -48,8 +47,6 @@ const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return { title: 'Slot Management', subtitle: 'Configure capacity, floors, and categories' };
       case '/reports':
         return { title: 'Reports & Export', subtitle: 'Download generated reports and binary backups' };
-      case '/viva-demos':
-        return { title: 'OOP Viva Test Bench', subtitle: 'Demonstrations for CSC2104 course evaluation' };
       default:
         return { title: 'Vehicle Parking Management System' };
     }
@@ -143,15 +140,6 @@ export const App: React.FC = () => {
             element={
               <ProtectedLayout>
                 <ReportsPage />
-              </ProtectedLayout>
-            }
-          />
-
-          <Route
-            path="/viva-demos"
-            element={
-              <ProtectedLayout>
-                <VivaDemosPage />
               </ProtectedLayout>
             }
           />
