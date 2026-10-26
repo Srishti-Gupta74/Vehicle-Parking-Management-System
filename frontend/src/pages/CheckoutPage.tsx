@@ -12,6 +12,8 @@ import {
   Banknote,
   Smartphone,
   Layers,
+  Sparkles,
+  Zap,
 } from 'lucide-react';
 import { api } from '../services/api';
 import { ParkingReceipt, ParkingSession } from '../types';
@@ -96,59 +98,68 @@ export const CheckoutPage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex items-center justify-between">
+      <div className="glass-panel p-5 md:p-6 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Exit Booth & Fee Collection</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Cashier POS Terminal: Calculate tariff, record customer payment mode, and release parking bay
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl md:text-2xl font-display font-extrabold text-white tracking-wide">
+              Exit Terminal Checkout
+            </h1>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              POS Terminal
+            </span>
+          </div>
+          <p className="text-xs text-violet-300/80 mt-1 font-medium">
+            Cashier POS Terminal: Calculate polymorph tariff, collect payment & release parking bay
           </p>
         </div>
-        <div className="px-3 py-1.5 rounded-lg bg-purple-50 border border-purple-200 text-purple-700 text-xs font-semibold flex items-center gap-1.5">
-          <CreditCard className="w-4 h-4 text-purple-600" />
-          <span>Exit Booth POS</span>
+        <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-violet-950/40 border border-violet-500/30 text-violet-200 text-xs font-semibold shadow-glow-sm">
+          <CreditCard className="w-4 h-4 text-cyan-400" />
+          <span>Exit Gate POS</span>
         </div>
       </div>
 
       {error && (
-        <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2 font-medium">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+        <div className="p-3.5 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs flex items-center gap-2 font-medium shadow-glow-rose">
+          <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
           <span>{error}</span>
         </div>
       )}
 
       {/* Search Input Box */}
-      <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-3">
-        <label className="block text-xs font-bold text-slate-700">
+      <div className="glass-panel p-5 md:p-6 space-y-3">
+        <label className="block text-xs font-bold text-violet-200 uppercase tracking-wider">
           Search Active Vehicle by Registration Number
         </label>
         <div className="flex gap-2">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3.5 top-3 text-purple-400" />
+            <Search className="w-4 h-4 absolute left-3.5 top-3 text-cyan-400" />
             <input
               type="text"
               value={vehicleNumber}
               onChange={(e) => setVehicleNumber(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               placeholder="e.g. KA-05-MJ-4321 or KA-01-AB-1234"
-              className="w-full pl-10 pr-4 py-2.5 text-xs font-mono font-bold rounded-xl border border-purple-200/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 uppercase tracking-wider bg-white"
+              className="w-full glass-input pl-10 pr-4 font-mono font-bold tracking-wider uppercase text-sm"
             />
           </div>
           <button
+            type="button"
             onClick={() => handleSearch()}
             disabled={loading}
-            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold shadow-sm shadow-purple-500/25 transition-all disabled:opacity-50 flex items-center gap-1.5"
+            className="btn-ethereal px-5 py-2.5 flex items-center gap-2 text-xs font-bold"
           >
-            {loading ? 'Searching...' : 'Calculate Fee'}
+            <Search className="w-4 h-4 text-cyan-300" />
+            <span>{loading ? 'Searching...' : 'Search'}</span>
           </button>
         </div>
 
-        {/* Quick select chips of currently parked vehicles */}
+        {/* Quick Select from Active Sessions */}
         {activeSessions.length > 0 && (
           <div className="pt-2">
-            <span className="text-[11px] text-slate-400 font-semibold block mb-1.5">
+            <span className="text-[10px] font-bold text-violet-300/70 uppercase tracking-widest block mb-1.5">
               Quick Select Currently Parked ({activeSessions.length}):
             </span>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto">
               {activeSessions.map((s) => (
                 <button
                   key={s.sessionId}
@@ -157,9 +168,11 @@ export const CheckoutPage: React.FC = () => {
                     setVehicleNumber(s.vehicle.vehicleNumber);
                     handleSearch(s.vehicle.vehicleNumber);
                   }}
-                  className="px-2.5 py-1 rounded-lg bg-purple-50/50 hover:bg-purple-100/70 hover:text-purple-700 border border-purple-200/70 text-[11px] font-mono font-bold text-purple-900 transition-colors"
+                  className="px-2.5 py-1 rounded-lg bg-violet-950/40 hover:bg-violet-900/60 border border-violet-500/25 text-violet-200 hover:text-white text-xs font-mono font-semibold transition-all flex items-center gap-1.5 hover:border-violet-400/50"
                 >
-                  {s.vehicle.vehicleNumber} ({s.slot.slotNumber})
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]"></span>
+                  <span>{s.vehicle.vehicleNumber}</span>
+                  <span className="text-[10px] text-cyan-300/80">({s.slot.slotNumber})</span>
                 </button>
               ))}
             </div>
@@ -167,112 +180,124 @@ export const CheckoutPage: React.FC = () => {
         )}
       </div>
 
-      {/* Parking Summary & Payment Card */}
+      {/* Bill Calculation & Checkout Card */}
       {estimatedData && (
-        <form onSubmit={handleCheckoutSubmit} className="space-y-6">
-          <div className="bg-white p-6 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-purple-100/60">
-              <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <Car className="w-4 h-4 text-purple-600" />
-                <span>Parking Summary for {estimatedData.vehicleNumber}</span>
+        <form onSubmit={handleCheckoutSubmit} className="glass-panel p-6 space-y-5 border-violet-400/30 shadow-glow-sm">
+          <div className="flex items-center justify-between pb-3 border-b border-violet-500/20">
+            <div>
+              <h2 className="text-base md:text-lg font-display font-extrabold text-white">
+                Settlement Statement
               </h2>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200">
-                Active Session #{estimatedData.sessionId}
-              </span>
+              <p className="text-[11px] text-violet-300/70 font-mono">Session ID: #{estimatedData.sessionId}</p>
             </div>
+            <span className="text-xs font-bold px-3 py-1 rounded-xl bg-cyan-950/50 text-cyan-300 border border-cyan-500/40 shadow-glow-sm">
+              Bay {estimatedData.slotNumber} (Floor {estimatedData.floor})
+            </span>
+          </div>
 
-            {/* Details Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-xl bg-purple-50/30 border border-purple-100 text-xs">
-              <div>
-                <span className="text-slate-400 font-medium block">Vehicle Type</span>
-                <span className="font-bold text-slate-800 text-sm">{estimatedData.vehicleType}</span>
+          <div className="space-y-4">
+            {/* Vehicle & Customer Details Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+              <div className="p-3 rounded-xl bg-violet-950/40 border border-violet-500/20">
+                <span className="text-[10px] text-violet-300/70 block uppercase tracking-wider">Vehicle Plate</span>
+                <span className="font-mono font-black text-white text-sm block mt-0.5">
+                  {estimatedData.vehicleNumber}
+                </span>
+                <span className="text-[10px] text-cyan-300 font-semibold mt-0.5 block">{estimatedData.vehicleType}</span>
               </div>
-              <div>
-                <span className="text-slate-400 font-medium block">Owner Name</span>
-                <span className="font-semibold text-slate-800 text-sm truncate block">
+
+              <div className="p-3 rounded-xl bg-violet-950/40 border border-violet-500/20">
+                <span className="text-[10px] text-violet-300/70 block uppercase tracking-wider">Owner Name</span>
+                <span className="font-bold text-white text-sm block mt-0.5 truncate">
                   {estimatedData.ownerName}
                 </span>
+                <span className="text-[10px] text-violet-300/60 block mt-0.5">Registered Driver</span>
               </div>
-              <div>
-                <span className="text-slate-400 font-medium block">Assigned Slot</span>
-                <span className="font-extrabold text-purple-700 text-base">
-                  {estimatedData.slotNumber} (Floor {estimatedData.floor})
+
+              <div className="p-3 rounded-xl bg-violet-950/40 border border-violet-500/20">
+                <span className="text-[10px] text-violet-300/70 block uppercase tracking-wider">Slot Assigned</span>
+                <span className="font-display font-black text-white text-sm block mt-0.5">
+                  {estimatedData.slotNumber}
                 </span>
+                <span className="text-[10px] text-violet-300/60 block mt-0.5">Floor Level {estimatedData.floor}</span>
               </div>
-              <div>
-                <span className="text-slate-400 font-medium block">Duration Elapsed</span>
-                <span className="font-extrabold text-slate-900 text-base">
-                  {estimatedData.formattedDuration || `${Math.max(1, Math.round((Date.now() - new Date(estimatedData.entryTime).getTime()) / 60000))} mins`}
+
+              <div className="p-3 rounded-xl bg-violet-950/40 border border-violet-500/20">
+                <span className="text-[10px] text-violet-300/70 block uppercase tracking-wider">Elapsed Time</span>
+                <span className="font-mono font-black text-emerald-400 text-sm block mt-0.5">
+                  {estimatedData.formattedDuration || `${estimatedData.durationHours} hrs`}
                 </span>
-                <span className="text-[10px] text-purple-600 font-medium block">
-                  Billed: {estimatedData.durationHours} hr minimum rate
+                <span className="text-[10px] text-violet-300/70 font-semibold block mt-0.5">
+                  Billed: {estimatedData.durationHours} hr rate
                 </span>
               </div>
             </div>
 
             {/* Time Stamp breakdown */}
-            <div className="flex justify-between items-center text-xs text-slate-600 px-1">
+            <div className="flex justify-between items-center text-xs text-violet-300/80 px-1 font-mono">
               <div>
-                <span className="text-slate-400">Entry Time: </span>
-                <span className="font-medium text-slate-800">
+                <span className="text-violet-400/70">Check-in: </span>
+                <span className="font-bold text-white">
                   {new Date(estimatedData.entryTime).toLocaleString()}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400">Estimated Exit: </span>
-                <span className="font-medium text-slate-800">
+                <span className="text-violet-400/70">Check-out: </span>
+                <span className="font-bold text-white">
                   {new Date().toLocaleString()}
                 </span>
               </div>
             </div>
 
             {/* Total Fee Highlight */}
-            <div className="p-4 rounded-xl bg-gradient-to-r from-purple-500/10 via-purple-600/10 to-indigo-500/10 border border-purple-200 flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-gradient-to-r from-violet-900/40 via-fuchsia-900/30 to-indigo-900/40 border border-violet-400/40 shadow-glow-sm flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold text-purple-900 uppercase tracking-wider block">
-                  Final Calculated Parking Fee
+                <span className="text-xs font-bold text-violet-200 uppercase tracking-wider block">
+                  Computed Parking Tariff
                 </span>
-                <span className="text-[11px] text-purple-700">
-                  Calculated dynamically in Java: {estimatedData.vehicleType}.calculateParkingFee({estimatedData.durationHours})
+                <span className="text-[11px] text-violet-300/80">
+                  Dynamic Polymorphic Dispatch: {estimatedData.vehicleType}.calculateParkingFee({estimatedData.durationHours})
                 </span>
               </div>
               <div className="text-right">
-                <span className="text-3xl font-black text-purple-700">
+                <span className="text-3xl md:text-4xl font-display font-black bg-gradient-to-r from-white via-cyan-200 to-fuchsia-300 bg-clip-text text-transparent drop-shadow-sm">
                   ₹{estimatedData.parkingFee.toFixed(2)}
                 </span>
               </div>
             </div>
 
             {/* Payment Method Selector */}
-            <div className="space-y-2 pt-2 border-t border-purple-100/60">
-              <label className="block text-xs font-bold text-slate-700">
-                Payment Mode Collected from Customer at Booth <span className="text-rose-500">*</span>
+            <div className="space-y-2 pt-2 border-t border-violet-500/20">
+              <label className="block text-xs font-bold text-violet-200 uppercase tracking-wider">
+                Tendered Payment Instrument <span className="text-rose-400">*</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { id: 'UPI', label: 'UPI / QR', icon: Smartphone, desc: 'Digital QR Scan' },
-                  { id: 'CASH', label: 'Cash', icon: Banknote, desc: 'Counter Cash Tendered' },
+                  { id: 'UPI', label: 'UPI / QR', icon: Smartphone, desc: 'Digital QR Transfer' },
+                  { id: 'CASH', label: 'Cash', icon: Banknote, desc: 'Cash Counter Tender' },
                   { id: 'CARD', label: 'Card', icon: CreditCard, desc: 'POS Terminal Swipe' },
                 ].map((pm) => (
                   <div
                     key={pm.id}
                     onClick={() => setPaymentMethod(pm.id as any)}
-                    className={`p-3 rounded-xl border-2 cursor-pointer transition-all flex items-center gap-3 ${
+                    className={`p-3.5 rounded-xl border-2 cursor-pointer transition-all duration-200 flex items-center gap-3 ${
                       paymentMethod === pm.id
-                        ? 'border-purple-600 bg-purple-50/70 shadow-sm shadow-purple-500/10'
-                        : 'border-purple-100/80 hover:border-purple-200 bg-purple-50/20'
+                        ? 'border-cyan-400 bg-cyan-950/40 shadow-glow-cyan scale-[1.02]'
+                        : 'border-violet-500/20 hover:border-violet-500/40 bg-violet-950/20'
                     }`}
                   >
                     <div
-                      className={`p-2 rounded-lg ${
-                        paymentMethod === pm.id ? 'bg-purple-600 text-white' : 'bg-slate-200 text-slate-600'
+                      className={`p-2.5 rounded-xl ${
+                        paymentMethod === pm.id
+                          ? 'bg-gradient-to-tr from-cyan-500 to-teal-500 text-white shadow-glow-cyan'
+                          : 'bg-violet-950/60 text-violet-300'
                       }`}
                     >
                       <pm.icon className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="text-xs font-bold text-slate-900 block">{pm.label}</span>
-                      <span className="text-[10px] text-slate-400">{pm.desc}</span>
+                      <span className="text-xs font-bold text-white block">{pm.label}</span>
+                      <span className="text-[10px] text-violet-300/60">{pm.desc}</span>
                     </div>
                   </div>
                 ))}
@@ -284,13 +309,13 @@ export const CheckoutPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={checkoutLoading}
-                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-800 text-white font-bold text-sm shadow-lg shadow-purple-600/30 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-3.5 px-4 btn-emerald-glow flex items-center justify-center gap-2 text-sm font-bold tracking-wide shadow-glow-emerald"
               >
-                <CheckCircle2 className="w-5 h-5" />
+                <CheckCircle2 className="w-5 h-5 text-emerald-200" />
                 <span>
                   {checkoutLoading
-                    ? 'Recording Collection & Vacating Slot...'
-                    : `Confirm Collection & Vacate Slot (₹${estimatedData.parkingFee.toFixed(2)})`}
+                    ? 'Recording Collection & Vacating Bay...'
+                    : `Confirm Collection & Vacate Bay (₹${estimatedData.parkingFee.toFixed(2)})`}
                 </span>
               </button>
             </div>

@@ -10,6 +10,7 @@ import {
   Car,
   Bike,
   Truck,
+  Sparkles,
 } from 'lucide-react';
 import { api } from '../services/api';
 import { ParkingSlot } from '../types';
@@ -93,26 +94,33 @@ export const SlotManagementPage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="glass-panel p-5 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Slot Management</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Configure parking slot capacities, types, and floor allocations
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl md:text-2xl font-display font-extrabold text-white tracking-wide">
+              Slot Configuration Matrix
+            </h1>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/30">
+              Topology
+            </span>
+          </div>
+          <p className="text-xs text-violet-300/80 mt-1 font-medium">
+            Configure parking slot capacities, subclass allowances, and multi-floor geometry
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           <button
             onClick={fetchSlots}
-            className="p-2 rounded-xl border border-purple-200 text-purple-700 hover:bg-purple-50 transition-colors"
+            className="p-2.5 rounded-xl border border-violet-500/30 bg-violet-950/40 text-violet-200 hover:text-white hover:bg-violet-900/40 transition-all shadow-sm"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-purple-600' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-cyan-400' : ''}`} />
           </button>
           <button
             onClick={() => setIsAddOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-sm shadow-purple-500/25 transition-all"
+            className="btn-ethereal flex items-center gap-2 px-4 py-2.5 text-xs font-bold tracking-wide"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 text-cyan-300" />
             <span>Add New Slot</span>
           </button>
         </div>
@@ -120,128 +128,131 @@ export const SlotManagementPage: React.FC = () => {
 
       {/* Notifications */}
       {error && (
-        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+        <div className="p-4 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs font-medium flex items-center gap-2 shadow-glow-rose">
+          <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
           <span>{error}</span>
         </div>
       )}
 
       {success && (
-        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 shrink-0" />
+        <div className="p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs font-medium flex items-center gap-2 shadow-glow-emerald">
+          <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
           <span>{success}</span>
         </div>
       )}
 
       {/* Filter Toolbar */}
-      <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex flex-wrap items-center justify-between gap-3 text-xs">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-slate-400 font-semibold uppercase text-[11px]">Type:</span>
-            <select
-              value={filterType}
-              onChange={(e) => setFilterType(e.target.value)}
-              className="px-2.5 py-1.5 rounded-lg border border-purple-200 font-semibold text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
-            >
-              <option value="ALL">All Types</option>
-              <option value="BIKE">BIKE</option>
-              <option value="CAR">CAR</option>
-              <option value="TRUCK">TRUCK</option>
-            </select>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span className="text-slate-400 font-semibold uppercase text-[11px]">Floor:</span>
+      <div className="glass-panel px-5 py-3.5 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-3">
+          {/* Floor selector */}
+          <div className="flex items-center gap-1.5">
+            <span className="text-[10px] font-bold text-violet-300/70 uppercase tracking-wider">Floor:</span>
             <select
               value={filterFloor}
               onChange={(e) => setFilterFloor(e.target.value)}
-              className="px-2.5 py-1.5 rounded-lg border border-purple-200 font-semibold text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="glass-input py-1.5 text-xs font-semibold"
             >
-              <option value="ALL">All Floors</option>
-              <option value="1">Floor 1</option>
-              <option value="2">Floor 2</option>
+              <option value="ALL" className="bg-[#0e0722] text-white">All Floors</option>
+              <option value="1" className="bg-[#0e0722] text-white">Floor 1</option>
+              <option value="2" className="bg-[#0e0722] text-white">Floor 2</option>
+            </select>
+          </div>
+
+          {/* Type selector */}
+          <div className="flex items-center gap-1.5">
+            <span className="text-[10px] font-bold text-violet-300/70 uppercase tracking-wider">Class:</span>
+            <select
+              value={filterType}
+              onChange={(e) => setFilterType(e.target.value)}
+              className="glass-input py-1.5 text-xs font-semibold"
+            >
+              <option value="ALL" className="bg-[#0e0722] text-white">All Compatible Classes</option>
+              <option value="CAR" className="bg-[#0e0722] text-white">Car (FourWheeler)</option>
+              <option value="BIKE" className="bg-[#0e0722] text-white">Bike (TwoWheeler)</option>
+              <option value="TRUCK" className="bg-[#0e0722] text-white">Truck (Commercial)</option>
             </select>
           </div>
         </div>
 
-        <div className="text-slate-500 text-xs font-semibold">
+        <div className="text-violet-300/70 font-mono text-[11px]">
           Showing {filteredSlots.length} of {slots.length} total slots
         </div>
       </div>
 
       {/* Slots Table */}
-      <div className="bg-white rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 overflow-hidden">
+      <div className="glass-panel overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-purple-50/50 border-b border-purple-100/80 text-purple-900/70 uppercase tracking-wider font-semibold text-[11px]">
+            <thead className="bg-violet-950/60 border-b border-violet-500/20 text-violet-300/80 uppercase tracking-widest font-bold text-[10px]">
               <tr>
-                <th className="px-5 py-3.5">Slot Number</th>
-                <th className="px-5 py-3.5">Compatible Type</th>
-                <th className="px-5 py-3.5">Floor</th>
-                <th className="px-5 py-3.5">Current Status</th>
-                <th className="px-5 py-3.5">Occupant</th>
-                <th className="px-5 py-3.5 text-right">Actions</th>
+                <th className="px-5 py-4">Slot Number</th>
+                <th className="px-5 py-4">Compatible Class</th>
+                <th className="px-5 py-4">Floor</th>
+                <th className="px-5 py-4">Current Status</th>
+                <th className="px-5 py-4">Occupant</th>
+                <th className="px-5 py-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-purple-100/50">
+            <tbody className="divide-y divide-violet-500/15">
               {filteredSlots.length > 0 ? (
                 filteredSlots.map((slot) => {
                   const isOccupied = slot.status === 'OCCUPIED';
                   return (
-                    <tr key={slot.slotId} className="hover:bg-purple-50/30 transition-colors">
-                      <td className="px-5 py-3.5 font-bold font-mono text-purple-950 text-sm">
+                    <tr key={slot.slotId} className="hover:bg-violet-900/20 transition-colors">
+                      <td className="px-5 py-4 font-display font-black text-white text-base">
                         {slot.slotNumber}
                       </td>
-                      <td className="px-5 py-3.5">
+                      <td className="px-5 py-4">
                         <span
-                          className={`px-2.5 py-0.5 rounded-full font-bold text-[10px] ${
+                          className={`px-2.5 py-0.5 rounded-full font-bold text-[10px] border ${
                             slot.slotType === 'BIKE'
-                              ? 'bg-violet-50 text-violet-700 border border-violet-200'
+                              ? 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30'
                               : slot.slotType === 'CAR'
-                              ? 'bg-purple-50 text-purple-700 border border-purple-200'
-                              : 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                              ? 'bg-violet-500/15 text-violet-300 border-violet-500/30'
+                              : 'bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-500/30'
                           }`}
                         >
                           {slot.slotType}
                         </span>
                       </td>
-                      <td className="px-5 py-3.5 font-semibold text-slate-700">
+                      <td className="px-5 py-4 font-semibold text-violet-200">
                         Floor {slot.floor}
                       </td>
-                      <td className="px-5 py-3.5">
+                      <td className="px-5 py-4">
                         <span
-                          className={`px-2.5 py-0.5 rounded-full font-bold text-[10px] ${
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-bold text-[10px] border ${
                             isOccupied
-                              ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                              : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                              ? 'bg-rose-500/20 text-rose-300 border-rose-500/40 shadow-glow-rose'
+                              : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-glow-emerald'
                           }`}
                         >
-                          {slot.status}
+                          <span className={`w-1.5 h-1.5 rounded-full ${isOccupied ? 'bg-rose-400' : 'bg-emerald-400'} animate-pulse`}></span>
+                          <span>{slot.status}</span>
                         </span>
                       </td>
-                      <td className="px-5 py-3.5">
+                      <td className="px-5 py-4 font-mono">
                         {isOccupied ? (
-                          <span className="font-mono font-semibold text-slate-800">
+                          <span className="font-bold text-white px-2 py-0.5 rounded bg-black/60 border border-violet-500/30">
                             {slot.currentVehicleNumber || 'Occupied'}
                           </span>
                         ) : (
-                          <span className="text-slate-400">—</span>
+                          <span className="text-violet-300/40">—</span>
                         )}
                       </td>
-                      <td className="px-5 py-3.5 text-right space-x-2">
+                      <td className="px-5 py-4 text-right space-x-2">
                         <button
                           onClick={() => handleToggleStatus(slot)}
-                          className="px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-800 font-semibold text-[11px] transition-colors border border-purple-200"
+                          className="px-3 py-1.5 rounded-xl bg-violet-950/60 hover:bg-violet-900/80 text-violet-200 hover:text-white font-semibold text-[11px] transition-all border border-violet-500/30 hover:border-violet-400/50"
                         >
-                          Toggle Status
+                          Toggle State
                         </button>
                         <button
                           onClick={() => handleDeleteSlot(slot)}
                           title={isOccupied ? 'Cannot delete occupied slot' : 'Delete slot'}
-                          className={`p-1.5 rounded transition-colors ${
+                          className={`p-2 rounded-xl transition-all ${
                             isOccupied
-                              ? 'text-slate-300 cursor-not-allowed'
-                              : 'text-rose-600 hover:bg-rose-50'
+                              ? 'text-violet-500/40 cursor-not-allowed'
+                              : 'text-rose-400 hover:bg-rose-950/60 hover:text-rose-300 hover:border hover:border-rose-500/40'
                           }`}
                         >
                           <Trash2 className="w-4 h-4 inline" />
@@ -252,7 +263,7 @@ export const SlotManagementPage: React.FC = () => {
                 })
               ) : (
                 <tr>
-                  <td colSpan={6} className="text-center py-10 text-slate-400">
+                  <td colSpan={6} className="text-center py-10 text-violet-300/50">
                     No slots found matching filter criteria.
                   </td>
                 </tr>

@@ -9,6 +9,8 @@ import {
   ShieldCheck,
   CreditCard,
   Ticket,
+  Sparkles,
+  Zap,
 } from 'lucide-react';
 import { api } from '../services/api';
 import { TicketModal } from '../components/TicketModal';
@@ -82,25 +84,32 @@ export const ParkVehiclePage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 flex items-center justify-between">
+      <div className="glass-panel p-5 md:p-6 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Park Vehicle Entry</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Register vehicle arrival and automatically assign an available parking slot
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl md:text-2xl font-display font-extrabold text-white tracking-wide">
+              Vehicle Check-In
+            </h1>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+              Entry Gate
+            </span>
+          </div>
+          <p className="text-xs text-violet-300/80 mt-1 font-medium">
+            Register vehicle arrival, enforce OOP validation & auto-assign next available parking bay
           </p>
         </div>
-        <div className="px-3 py-1.5 rounded-lg bg-purple-50 border border-purple-200 text-purple-700 text-xs font-semibold flex items-center gap-1.5">
-          <ShieldCheck className="w-4 h-4 text-purple-600" />
+        <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-violet-950/40 border border-violet-500/30 text-violet-200 text-xs font-semibold shadow-glow-sm">
+          <ShieldCheck className="w-4 h-4 text-cyan-400" />
           <span>Synchronized Allocation</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Park Form */}
-        <div className="md:col-span-2 bg-white p-6 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-5">
+        <div className="md:col-span-2 glass-panel p-6 space-y-5">
           {error && (
-            <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2 font-medium">
-              <AlertCircle className="w-4 h-4 shrink-0" />
+            <div className="p-3.5 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs flex items-center gap-2 font-medium shadow-glow-rose">
+              <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
               <span>{error}</span>
             </div>
           )}
@@ -108,8 +117,8 @@ export const ParkVehiclePage: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Vehicle Type Cards */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-2">
-                Select Vehicle Type Category <span className="text-rose-500">*</span>
+              <label className="block text-xs font-bold text-violet-200 uppercase tracking-wider mb-2">
+                Vehicle Classification <span className="text-rose-400">*</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {[
@@ -120,47 +129,48 @@ export const ParkVehiclePage: React.FC = () => {
                   <div
                     key={type.id}
                     onClick={() => setVehicleType(type.id)}
-                    className={`p-3.5 rounded-xl border-2 cursor-pointer transition-all flex flex-col items-center text-center ${
+                    className={`p-3.5 rounded-2xl border-2 cursor-pointer transition-all duration-200 flex flex-col items-center text-center ${
                       vehicleType === type.id
-                        ? 'border-purple-600 bg-purple-50/70 shadow-sm shadow-purple-500/10'
-                        : 'border-purple-100/80 hover:border-purple-200 bg-purple-50/20'
+                        ? 'border-violet-400 bg-violet-900/40 shadow-glow-sm scale-[1.02]'
+                        : 'border-violet-500/20 hover:border-violet-500/40 bg-violet-950/20'
                     }`}
                   >
-                    <type.icon
-                      className={`w-6 h-6 mb-1 ${
-                        vehicleType === type.id ? 'text-purple-600' : 'text-slate-400'
+                    <div
+                      className={`p-2 rounded-xl mb-2 ${
+                        vehicleType === type.id
+                          ? 'bg-gradient-to-tr from-violet-600 to-fuchsia-600 text-white shadow-glow-sm'
+                          : 'bg-violet-950/60 text-violet-300'
                       }`}
-                    />
-                    <span className="text-xs font-bold text-slate-900">{type.label}</span>
-                    <span className="text-[10px] text-slate-400 mt-0.5">{type.desc}</span>
-                    <span className="text-[10px] font-bold text-purple-700 mt-1">{type.rate}</span>
+                    >
+                      <type.icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-xs font-bold text-white">{type.label}</span>
+                    <span className="text-[10px] text-cyan-300/90 font-semibold mt-0.5">{type.rate}</span>
+                    <span className="text-[9px] text-violet-300/60 mt-0.5">{type.desc}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Vehicle Number */}
+            {/* Vehicle Registration Number */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Vehicle Registration Number <span className="text-rose-500">*</span>
+              <label className="block text-xs font-bold text-violet-200 uppercase tracking-wider mb-1.5">
+                License Plate / Registration No. <span className="text-rose-400">*</span>
               </label>
               <input
                 type="text"
                 required
                 value={vehicleNumber}
-                onChange={(e) => setVehicleNumber(e.target.value)}
-                placeholder="e.g. KA-05-MJ-4321 or DL-01-AB-1234"
-                className="w-full px-3.5 py-2.5 text-xs font-mono font-bold rounded-xl border border-purple-200/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 uppercase tracking-wider bg-white"
+                onChange={(e) => setVehicleNumber(e.target.value.toUpperCase())}
+                placeholder="e.g. KA-05-MJ-4321 or DL-03-C-8899"
+                className="w-full glass-input font-mono font-bold tracking-wider uppercase text-sm"
               />
-              <p className="text-[11px] text-slate-400 mt-1">
-                Must be unique. System checks for active parking sessions.
-              </p>
             </div>
 
             {/* Owner Name */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Owner Full Name <span className="text-rose-500">*</span>
+              <label className="block text-xs font-bold text-violet-200 uppercase tracking-wider mb-1.5">
+                Owner Full Name <span className="text-rose-400">*</span>
               </label>
               <input
                 type="text"
@@ -168,14 +178,14 @@ export const ParkVehiclePage: React.FC = () => {
                 value={ownerName}
                 onChange={(e) => setOwnerName(e.target.value)}
                 placeholder="e.g. Rahul Sharma"
-                className="w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border border-purple-200/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white"
+                className="w-full glass-input"
               />
             </div>
 
             {/* Phone Number */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Contact Phone Number (10 Digits) <span className="text-rose-500">*</span>
+              <label className="block text-xs font-bold text-violet-200 uppercase tracking-wider mb-1.5">
+                Contact Phone Number (10 Digits) <span className="text-rose-400">*</span>
               </label>
               <input
                 type="tel"
@@ -184,7 +194,7 @@ export const ParkVehiclePage: React.FC = () => {
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
                 placeholder="e.g. 9876543210"
-                className="w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border border-purple-200/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white"
+                className="w-full glass-input font-mono"
               />
             </div>
 
@@ -193,10 +203,10 @@ export const ParkVehiclePage: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-xs shadow-md shadow-purple-600/30 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-3 px-4 btn-ethereal flex items-center justify-center gap-2 text-sm font-bold tracking-wide shadow-glow-md"
               >
-                <PlusCircle className="w-4 h-4" />
-                <span>{loading ? 'Assigning Slot...' : 'Park Vehicle & Generate Ticket'}</span>
+                <PlusCircle className="w-4 h-4 text-cyan-300" />
+                <span>{loading ? 'Assigning Bay & Slot...' : 'Park Vehicle & Generate Smart Slip'}</span>
               </button>
             </div>
           </form>
@@ -204,47 +214,47 @@ export const ParkVehiclePage: React.FC = () => {
 
         {/* Pricing Guide & Business Rules */}
         <div className="space-y-4">
-          <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-3">
-            <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-purple-100/60">
-              <CreditCard className="w-4 h-4 text-purple-600" />
+          <div className="glass-panel p-5 space-y-3.5">
+            <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2 pb-2 border-b border-violet-500/15">
+              <CreditCard className="w-4 h-4 text-cyan-400" />
               <span>Official Tariff Rules</span>
             </h3>
 
             <div className="space-y-2.5 text-xs">
-              <div className="p-2.5 rounded-lg bg-purple-50/30 border border-purple-100">
-                <div className="flex justify-between font-bold text-slate-800">
+              <div className="p-3 rounded-xl bg-violet-950/40 border border-violet-500/25">
+                <div className="flex justify-between font-bold text-white">
                   <span>Bike (TwoWheeler)</span>
-                  <span className="text-purple-700 font-extrabold">₹20 1st hr</span>
+                  <span className="text-cyan-300 font-extrabold">₹20 1st hr</span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-0.5">₹10 for each additional hour</p>
+                <p className="text-[11px] text-violet-300/70 mt-0.5">₹10 for each additional hour</p>
               </div>
 
-              <div className="p-2.5 rounded-lg bg-purple-50/30 border border-purple-100">
-                <div className="flex justify-between font-bold text-slate-800">
+              <div className="p-3 rounded-xl bg-violet-950/40 border border-violet-500/25">
+                <div className="flex justify-between font-bold text-white">
                   <span>Car (FourWheeler)</span>
-                  <span className="text-purple-700 font-extrabold">₹30 1st hr</span>
+                  <span className="text-cyan-300 font-extrabold">₹30 1st hr</span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-0.5">₹20 for each additional hour</p>
+                <p className="text-[11px] text-violet-300/70 mt-0.5">₹20 for each additional hour</p>
               </div>
 
-              <div className="p-2.5 rounded-lg bg-purple-50/30 border border-purple-100">
-                <div className="flex justify-between font-bold text-slate-800">
+              <div className="p-3 rounded-xl bg-violet-950/40 border border-violet-500/25">
+                <div className="flex justify-between font-bold text-white">
                   <span>Truck (Commercial)</span>
-                  <span className="text-purple-700 font-extrabold">₹50 1st hr</span>
+                  <span className="text-cyan-300 font-extrabold">₹50 1st hr</span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-0.5">₹30 for each additional hour</p>
+                <p className="text-[11px] text-violet-300/70 mt-0.5">₹30 for each additional hour</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-purple-50/80 p-4 rounded-2xl border border-purple-200 text-xs text-purple-950 space-y-2">
-            <h4 className="font-bold flex items-center gap-1.5 text-purple-900">
-              <CheckCircle2 className="w-4 h-4 text-purple-600" />
-              <span>OOP Verification</span>
+          <div className="glass-panel p-4 border-violet-500/30 text-xs space-y-2">
+            <h4 className="font-bold flex items-center gap-1.5 text-violet-200">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <span>OOP Architecture</span>
             </h4>
-            <p className="text-[11px] leading-relaxed text-purple-900/90">
-              When submitting, the Java backend invokes the <code>ParkingLot.assignSlot</code> synchronized method and
-              applies <strong>Runtime Polymorphism</strong> using the <code>Vehicle</code> hierarchy.
+            <p className="text-[11px] leading-relaxed text-violet-300/80">
+              Upon submission, the Spring Boot backend invokes <code>ParkingLot.assignSlot</code> synchronized method and
+              applies <strong>Runtime Polymorphism</strong> using the <code>Vehicle</code> class hierarchy.
             </p>
           </div>
         </div>

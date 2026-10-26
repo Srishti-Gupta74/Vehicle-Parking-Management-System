@@ -9,6 +9,7 @@ import {
   Filter,
   CheckCircle,
   AlertCircle,
+  Sparkles,
 } from 'lucide-react';
 import { api } from '../services/api';
 import { ParkingSlot } from '../types';
@@ -69,23 +70,30 @@ export const ParkingLotPage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto">
       {/* Header and Stats */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5">
+      <div className="glass-panel p-5 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Visual Parking Facility</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Interactive multi-floor layout representing the underlying 2D array grid
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl md:text-2xl font-display font-extrabold text-white tracking-wide">
+              Spatial Parking Matrix
+            </h1>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/30">
+              2D Grid
+            </span>
+          </div>
+          <p className="text-xs text-violet-300/80 mt-1 font-medium">
+            Interactive floor plan visualizing in-memory 2D array state and live telemetry
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
           {/* Status Counter Chips */}
-          <div className="flex items-center gap-2 text-xs font-semibold">
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <div className="flex items-center gap-2.5 text-xs font-semibold">
+            <span className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-950/50 text-emerald-300 border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.25)]">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>
               <span>{availableCount} Available</span>
             </span>
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 text-amber-700 border border-amber-200">
-              <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+            <span className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-rose-950/50 text-rose-300 border border-rose-500/40 shadow-[0_0_15px_rgba(244,63,94,0.25)]">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-400 shadow-[0_0_8px_#fb7185] animate-pulse"></span>
               <span>{occupiedCount} Occupied</span>
             </span>
           </div>
@@ -93,34 +101,34 @@ export const ParkingLotPage: React.FC = () => {
           <button
             onClick={fetchSlots}
             title="Refresh slots"
-            className="p-2 rounded-xl border border-purple-200 text-purple-700 hover:bg-purple-50 transition-colors"
+            className="p-2.5 rounded-xl border border-violet-500/30 bg-violet-950/40 text-violet-200 hover:text-white hover:bg-violet-900/40 hover:border-violet-400/50 transition-all shadow-sm"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-purple-600' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-cyan-400' : ''}`} />
           </button>
 
           <button
             onClick={() => setIsAddSlotOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-sm shadow-purple-500/25 transition-all"
+            className="btn-ethereal flex items-center gap-2 px-4 py-2.5 text-xs font-bold tracking-wide"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 text-cyan-300" />
             <span>Add Slot</span>
           </button>
         </div>
       </div>
 
       {/* Filter Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-white px-5 py-3 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 text-xs">
+      <div className="glass-panel px-5 py-3.5 flex flex-wrap items-center justify-between gap-3 text-xs">
         {/* Floor Tabs */}
         <div className="flex items-center gap-1.5">
-          <span className="text-slate-400 font-semibold uppercase tracking-wider text-[11px] mr-1">Floor:</span>
+          <span className="text-violet-400/80 font-bold uppercase tracking-widest text-[10px] mr-1.5">Floor Level:</span>
           {(['ALL', 1, 2] as const).map((floor) => (
             <button
               key={floor}
               onClick={() => setSelectedFloor(floor)}
-              className={`px-3 py-1.5 rounded-xl font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all duration-200 border ${
                 selectedFloor === floor
-                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-sm shadow-purple-500/25'
-                  : 'text-slate-600 hover:bg-purple-50 hover:text-purple-700'
+                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-glow-sm border-violet-400/40'
+                  : 'text-violet-200/60 hover:text-white hover:bg-violet-950/60 border-transparent'
               }`}
             >
               {floor === 'ALL' ? 'All Floors' : `Floor ${floor}`}
@@ -130,7 +138,7 @@ export const ParkingLotPage: React.FC = () => {
 
         {/* Vehicle Type Tabs */}
         <div className="flex items-center gap-1.5">
-          <span className="text-slate-400 font-semibold uppercase tracking-wider text-[11px] mr-1">Category:</span>
+          <span className="text-violet-400/80 font-bold uppercase tracking-widest text-[10px] mr-1.5">Class:</span>
           {[
             { id: 'ALL', label: 'All Slots' },
             { id: 'CAR', label: 'Cars', icon: Car },
@@ -140,10 +148,10 @@ export const ParkingLotPage: React.FC = () => {
             <button
               key={type.id}
               onClick={() => setSelectedType(type.id)}
-              className={`px-3 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+              className={`px-3 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all duration-200 border ${
                 selectedType === type.id
-                  ? 'bg-purple-900 text-white shadow-sm'
-                  : 'text-slate-600 hover:bg-purple-50 hover:text-purple-700'
+                  ? 'bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white shadow-glow-sm border-fuchsia-400/40'
+                  : 'text-violet-200/60 hover:text-white hover:bg-violet-950/60 border-transparent'
               }`}
             >
               {type.icon && <type.icon className="w-3.5 h-3.5" />}
@@ -154,8 +162,8 @@ export const ParkingLotPage: React.FC = () => {
       </div>
 
       {error && (
-        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+        <div className="p-4 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs font-medium flex items-center gap-2 shadow-glow-rose">
+          <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
           <span>{error}</span>
         </div>
       )}
@@ -164,18 +172,20 @@ export const ParkingLotPage: React.FC = () => {
       <div className="space-y-6">
         {/* CAR SLOTS SECTION */}
         {(selectedType === 'ALL' || selectedType === 'CAR') && (
-          <div className="bg-white p-6 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-purple-100/60">
-              <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-lg bg-purple-50 text-purple-600">
+          <div className="glass-panel p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-violet-500/15">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-violet-500/20 text-violet-300 border border-violet-500/30 shadow-[0_0_12px_rgba(139,92,246,0.2)]">
                   <Car className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">Four-Wheeler Car Slots</h3>
-                  <p className="text-[11px] text-slate-400">Rate: ₹30 first hour, ₹20 each additional hour</p>
+                  <h3 className="text-sm md:text-base font-display font-bold text-white tracking-wide">
+                    Four-Wheeler Car Bays
+                  </h3>
+                  <p className="text-[11px] text-violet-300/70">Rate: ₹30 first hour, ₹20 each additional hour</p>
                 </div>
               </div>
-              <span className="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200">
+              <span className="text-xs font-semibold text-cyan-300 bg-cyan-950/40 px-3 py-1 rounded-xl border border-cyan-500/30">
                 {carSlots.length} Slots
               </span>
             </div>
@@ -190,18 +200,20 @@ export const ParkingLotPage: React.FC = () => {
 
         {/* BIKE SLOTS SECTION */}
         {(selectedType === 'ALL' || selectedType === 'BIKE') && (
-          <div className="bg-white p-6 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-purple-100/60">
-              <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-lg bg-violet-50 text-violet-600">
+          <div className="glass-panel p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-violet-500/15">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-[0_0_12px_rgba(6,182,212,0.2)]">
                   <Bike className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">Two-Wheeler Bike Slots</h3>
-                  <p className="text-[11px] text-slate-400">Rate: ₹20 first hour, ₹10 each additional hour</p>
+                  <h3 className="text-sm md:text-base font-display font-bold text-white tracking-wide">
+                    Two-Wheeler Bike Bays
+                  </h3>
+                  <p className="text-[11px] text-violet-300/70">Rate: ₹20 first hour, ₹10 each additional hour</p>
                 </div>
               </div>
-              <span className="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200">
+              <span className="text-xs font-semibold text-cyan-300 bg-cyan-950/40 px-3 py-1 rounded-xl border border-cyan-500/30">
                 {bikeSlots.length} Slots
               </span>
             </div>
@@ -216,18 +228,20 @@ export const ParkingLotPage: React.FC = () => {
 
         {/* TRUCK SLOTS SECTION */}
         {(selectedType === 'ALL' || selectedType === 'TRUCK') && (
-          <div className="bg-white p-6 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-purple-100/60">
-              <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-lg bg-indigo-50 text-indigo-600">
+          <div className="glass-panel p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-violet-500/15">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30 shadow-[0_0_12px_rgba(217,70,239,0.2)]">
                   <Truck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">Heavy Truck / Commercial Slots</h3>
-                  <p className="text-[11px] text-slate-400">Rate: ₹50 first hour, ₹30 each additional hour</p>
+                  <h3 className="text-sm md:text-base font-display font-bold text-white tracking-wide">
+                    Heavy Commercial & Truck Bays
+                  </h3>
+                  <p className="text-[11px] text-violet-300/70">Rate: ₹50 first hour, ₹30 each additional hour</p>
                 </div>
               </div>
-              <span className="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200">
+              <span className="text-xs font-semibold text-fuchsia-300 bg-fuchsia-950/40 px-3 py-1 rounded-xl border border-fuchsia-500/30">
                 {truckSlots.length} Slots
               </span>
             </div>
@@ -263,16 +277,24 @@ const SlotCard: React.FC<SlotCardProps> = ({ slot, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className={`group relative p-3.5 rounded-xl border-2 transition-all cursor-pointer select-none flex flex-col justify-between min-h-[115px] ${
+      className={`group relative p-3.5 rounded-2xl border-2 transition-all duration-300 cursor-pointer select-none flex flex-col justify-between min-h-[120px] backdrop-blur-md ${
         isOccupied
-          ? 'bg-amber-50/70 border-amber-300 hover:border-amber-500 hover:shadow-md'
-          : 'bg-emerald-50/70 border-emerald-300 hover:border-emerald-500 hover:shadow-md'
+          ? 'bg-rose-950/30 border-rose-500/40 hover:border-rose-400 hover:shadow-glow-rose hover:scale-[1.03]'
+          : 'bg-emerald-950/30 border-emerald-500/40 hover:border-emerald-400 hover:shadow-glow-emerald hover:scale-[1.03]'
       }`}
     >
       {/* Top Slot Header */}
       <div className="flex items-center justify-between">
-        <span className="font-extrabold text-sm text-slate-900 tracking-tight">{slot.slotNumber}</span>
-        <span className="text-[10px] font-semibold text-slate-500 bg-white/80 px-1.5 py-0.5 rounded border border-slate-200">
+        <span className="font-display font-black text-sm md:text-base text-white tracking-tight">
+          {slot.slotNumber}
+        </span>
+        <span
+          className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md border font-mono ${
+            isOccupied
+              ? 'bg-rose-950/60 text-rose-300 border-rose-500/30'
+              : 'bg-emerald-950/60 text-emerald-300 border-emerald-500/30'
+          }`}
+        >
           F{slot.floor}
         </span>
       </div>
@@ -281,34 +303,34 @@ const SlotCard: React.FC<SlotCardProps> = ({ slot, onClick }) => {
       <div className="my-1.5">
         {isOccupied ? (
           <div>
-            <span className="font-mono text-xs font-bold text-amber-900 block truncate">
+            <span className="font-mono text-xs font-black text-rose-200 bg-black/60 border border-rose-500/40 px-1.5 py-0.5 rounded block truncate shadow-inner">
               {slot.currentVehicleNumber || 'OCCUPIED'}
             </span>
-            <span className="text-[10px] text-amber-700/90 font-medium block truncate">
+            <span className="text-[10px] text-rose-300/80 font-medium block truncate mt-1">
               {slot.currentOwnerName ? `${slot.currentOwnerName} • ${slot.currentDurationHours || 1}h` : 'Parked'}
             </span>
           </div>
         ) : (
           <div>
-            <span className="text-xs font-bold text-emerald-700 flex items-center gap-1">
-              <CheckCircle className="w-3.5 h-3.5" />
-              <span>FREE</span>
+            <span className="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>
+              <span>AVAILABLE</span>
             </span>
-            <span className="text-[10px] text-emerald-600/80 font-medium block">
-              Ready to park
+            <span className="text-[10px] text-emerald-300/70 font-medium block mt-0.5">
+              Ready for allocation
             </span>
           </div>
         )}
       </div>
 
       {/* Bottom Status Tag */}
-      <div className="pt-1.5 border-t border-slate-200/50 flex items-center justify-between text-[10px]">
-        <span className="font-semibold text-slate-500">{slot.slotType}</span>
+      <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[10px]">
+        <span className="font-semibold text-violet-300/70">{slot.slotType}</span>
         <span
-          className={`font-bold px-1.5 py-0.5 rounded text-[9px] ${
+          className={`font-black px-1.5 py-0.5 rounded text-[9px] tracking-wider uppercase ${
             isOccupied
-              ? 'bg-amber-200 text-amber-900'
-              : 'bg-emerald-200 text-emerald-900'
+              ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
+              : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
           }`}
         >
           {isOccupied ? 'BUSY' : 'OPEN'}

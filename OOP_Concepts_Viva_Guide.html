@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSC2104 - OOP Concepts & Java Viva Guide</title>
+<style>
+  @page {
+    size: A4;
+    margin: 15mm 15mm 15mm 15mm;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.55;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+  }
+  .header-card {
+    background: linear-gradient(135deg, #4c1d95, #6b21a8, #4338ca);
+    color: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 14px rgba(76, 29, 149, 0.15);
+  }
+  .header-card h1 {
+    margin: 0 0 6px 0;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .header-card p {
+    margin: 4px 0 0 0;
+    font-size: 12px;
+    color: #e9d5ff;
+    font-weight: 500;
+  }
+  .badge-row {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #4c1d95;
+    border-bottom: 2px solid #ede9fe;
+    padding-bottom: 6px;
+    margin-top: 24px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .concept-card {
+    background: #faf8fd;
+    border: 1px solid #e9d5ff;
+    border-left: 4px solid #7c3aed;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+  }
+  .concept-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3b0764;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .concept-loc {
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    background: #ede9fe;
+    color: #581c87;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .viva-say {
+    background: #ffffff;
+    border: 1px solid #ddd6fe;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-top: 8px;
+    font-size: 12px;
+  }
+  .viva-say-label {
+    font-weight: 700;
+    color: #6b21a8;
+    margin-bottom: 4px;
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  pre {
+    background: #1e1b4b;
+    color: #e0e7ff;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-family: Consolas, monospace;
+    overflow-x: auto;
+    margin: 8px 0;
+  }
+  code {
+    font-family: Consolas, monospace;
+    background: #ede9fe;
+    color: #581c87;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 11.5px;
+    page-break-inside: avoid;
+  }
+  th {
+    background: #6b21a8;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: left;
+    padding: 8px 10px;
+    border: 1px solid #581c87;
+  }
+  td {
+    padding: 7px 10px;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  tr:nth-child(even) {
+    background-color: #faf8fd;
+  }
+  .qa-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+  }
+  .qa-q {
+    font-weight: 700;
+    color: #0f172a;
+    font-size: 12.5px;
+    margin-bottom: 4px;
+  }
+  .qa-a {
+    color: #334155;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header-card">
+    <h1>Vehicle Parking Management System (VPMS)</h1>
+    <p>CSC2104: Object Oriented Programming in Java &bull; Comprehensive Viva & Code Reference Guide</p>
+    <div class="badge-row">
+      <span class="badge">Java 21 LTS</span>
+      <span class="badge">Spring Boot 3.3.4</span>
+      <span class="badge">MySQL 8.0</span>
+      <span class="badge">React 18 + Tailwind</span>
+      <span class="badge">Full OOP Syllabus</span>
+    </div>
+  </div>
+
+  <!-- Code Location Notice -->
+  <div style="background: #fdf4ff; border: 1px solid #f0abfc; padding: 10px 14px; border-radius: 8px; margin-bottom: 18px;">
+    <strong style="color: #86198f;">📍 Code Directory on Disk:</strong>
+    <code style="display: block; margin-top: 4px; background: #ffffff; border: 1px solid #f5d0fe; padding: 4px 8px; color: #701a75;">
+      C:\Users\Asus\Desktop\Vehicle-Parking-Management-System\backend\src\main\java\com\parking\management\
+    </code>
+  </div>
+
+  <!-- Part 1: Core 4 OOP Pillars -->
+  <div class="section-title">Part 1: The Four Core OOP Pillars</div>
+
+  <!-- 1. Abstraction -->
+  <div class="concept-card">
+    <div class="concept-title">
+      <span>1. Abstraction</span>
+      <span class="concept-loc">model/Vehicle.java (Lines 25&ndash;88)</span>
+    </div>
+    <p style="margin: 4px 0;"><strong>Concept:</strong> Hiding internal implementation complexity and enforcing an abstract contract that all subclasses must satisfy.</p>
+    <pre>public abstract class Vehicle implements ParkingFeeCalculator, PrintableReceipt {
+    // Abstract method — no generic formula exists; subclasses must provide it!
+    public abstract double calculateParkingFee(long durationHours);
+    public abstract String getVehicleType();
+}</pre>
+    <div class="viva-say">
+      <span class="viva-say-label">🗣️ What to say to Professor:</span>
+      &ldquo;Sir, a Vehicle is an abstract concept. You cannot park a generic vehicle without knowing whether it is a Bike, Car, or Truck because each has distinct physical footprint and tariff rates. Thus, <code>Vehicle</code> is an <code>abstract class</code> with abstract method <code>calculateParkingFee()</code> enforced on subclasses.&rdquo;
+    </div>
+  </div>
+
+  <!-- 2. Encapsulation -->
+  <div class="concept-card">
+    <div class="concept-title">
+      <span>2. Encapsulation</span>
+      <span class="concept-loc">model/Vehicle.java &amp; model/ParkingSlot.java</span>
+    </div>
+    <p style="margin: 4px 0;"><strong>Concept:</strong> Restricting direct field access using <code>private</code> keywords and protecting state through validated getters and setters.</p>
+    <pre>private String vehicleNumber;
+private String ownerName;
+
+public void setVehicleNumber(String vehicleNumber) {
+    if (vehicleNumber == null || vehicleNumber.trim().isEmpty()) {
+        throw new IllegalArgumentException("License number cannot be blank");
+    }
+    this.vehicleNumber = vehicleNumber.trim().toUpperCase();
+}</pre>
+    <div class="viva-say">
+      <span class="viva-say-label">🗣️ What to say to Professor:</span>
+      &ldquo;Sir, all model attributes are declared <code>private</code> to prevent state corruption. For instance, external classes cannot set a null plate number or invalid slot; setters enforce validation and defensive sanitization.&rdquo;
+    </div>
+  </div>
+
+  <!-- 3. Inheritance -->
+  <div class="concept-card">
+    <div class="concept-title">
+      <span>3. Inheritance (Multilevel &amp; Hierarchical)</span>
+      <span class="concept-loc">model/TwoWheeler.java, FourWheeler.java, Bike/Car/Truck.java</span>
+    </div>
+    <p style="margin: 4px 0;"><strong>Concept:</strong> Reusing common attributes/methods across parent and child classes using <code>extends</code> and the <code>super</code> keyword.</p>
+    <ul style="margin: 6px 0 6px 18px; padding: 0; font-size: 12px;">
+      <li><strong>Multilevel:</strong> <code>Vehicle</code> &rarr; <code>TwoWheeler</code> &rarr; <code>Bike</code></li>
+      <li><strong>Hierarchical:</strong> <code>Vehicle</code> &rarr; <code>FourWheeler</code> &rarr; branched into <code>Car</code> and <code>Truck</code></li>
+      <li><strong>super keyword:</strong> <code>super(vehicleNumber, ownerName, phoneNumber);</code> delegates common initialization to parent constructor.</li>
+    </ul>
+    <div class="viva-say">
+      <span class="viva-say-label">🗣️ What to say to Professor:</span>
+      &ldquo;Sir, we use a 3-tier inheritance tree. Common attributes like registration number are in <code>Vehicle</code>. Category attributes like <code>numberOfAxles</code> are in <code>FourWheeler</code>. Specific types like <code>Car</code> and <code>Truck</code> inherit and reuse parent logic via <code>super()</code>.&rdquo;
+    </div>
+  </div>
+
+  <!-- 4. Polymorphism -->
+  <div class="concept-card">
+    <div class="concept-title">
+      <span>4. Polymorphism (Compile-Time &amp; Runtime)</span>
+      <span class="concept-loc">Vehicle.java &amp; service/ParkingService.java (Lines 162&ndash;168)</span>
+    </div>
+    <p style="margin: 4px 0;"><strong>A. Compile-Time (Method Overloading):</strong> Same method name with different arguments.</p>
+    <pre>// Vehicle.java
+double calculateParkingFee(long durationHours);                         // Standard rate
+double calculateParkingFee(long durationHours, double discountPercent); // Overload with discount
+double calculateParkingFee(Integer hoursWrapper);                       // Overload with Autoboxing</pre>
+
+    <p style="margin: 6px 0 4px 0;"><strong>B. Runtime (Dynamic Method Dispatch / Overriding):</strong></p>
+    <pre>// ParkingService.java (Line 164)
+Vehicle vehicle = session.getVehicle();                        // Reference is abstract Vehicle
+double parkingFee = vehicle.calculateParkingFee(durationHours); // Dynamic dispatch to Bike/Car/Truck!</pre>
+    <div class="viva-say">
+      <span class="viva-say-label">🗣️ What to say to Professor:</span>
+      &ldquo;Sir, in <code>ParkingService.checkoutVehicle</code>, the variable reference is of type <code>Vehicle</code>. We do not use clumsy <code>if-else</code> checks. At runtime, the JVM inspects the heap object and dynamically invokes the correct tariff method (Car: ₹30 1st hr, Bike: ₹20 1st hr, Truck: ₹50 1st hr).&rdquo;
+    </div>
+  </div>
+
+  <!-- Part 2: Advanced OOP Concepts -->
+  <div class="section-title">Part 2: Advanced Syllabus Concepts</div>
+
+  <!-- Interfaces -->
+  <div class="concept-card">
+    <div class="concept-title">
+      <span>5. Interfaces &amp; Default Methods</span>
+      <span class="concept-loc">interfaces/ParkingFeeCalculator.java &amp; PrintableReceipt.java</span>
+    </div>
+    <p style="margin: 4px 0;">Java eliminates the Diamond Problem by avoiding multiple class inheritance, but achieves multiple inheritance of type via interfaces.</p>
+    <pre>public interface PrintableReceipt {
+    String formatReceiptDetails(String slotNumber, long durationHours, double fee, String paymentMethod);
+
+    // Java 8+ Default Method: shared receipt footer across all subclasses
+    default String getReceiptFooter() {
+        return "========================================\n" +
+               "  Thank you for using VPMS Parking!     \n" +
+               "========================================";
+    }
+}</pre>
+  </div>
+
+  <!-- 2D Arrays & Recursion -->
+  <div class="concept-card">
+    <div class="concept-title">
+      <span>6. Multidimensional Array (2D Grid) &amp; Recursion</span>
+      <span class="concept-loc">model/ParkingLot.java (Lines 28&ndash;118)</span>
+    </div>
+    <p style="margin: 4px 0;">Physical facility is modeled as a 2D matrix: <code>ParkingSlot[floorIndex][slotIndex]</code>. Finding a free slot uses recursive grid search:</p>
+    <pre>private ParkingSlot searchGridRecursively(SlotType slotType, int floorIndex, int slotIndex) {
+    if (floorIndex >= totalFloors) return null; // Base Case 1: All floors searched
+    if (slotIndex >= slotsPerFloor) return searchGridRecursively(slotType, floorIndex + 1, 0);
+
+    ParkingSlot slot = parkingGrid[floorIndex][slotIndex];
+    if (slot != null && slot.isAvailable() && slot.getSlotType() == slotType) {
+        return slot; // Base Case 2: Free matching slot found!
+    }
+    return searchGridRecursively(slotType, floorIndex, slotIndex + 1); // Recursive Step
+}</pre>
+  </div>
+
+  <!-- Nested Classes -->
+  <div class="concept-card">
+    <div class="concept-title">
+      <span>7. Nested Classes (Static Nested vs Inner)</span>
+      <span class="concept-loc">model/ParkingLot.java (Lines 244&ndash;340)</span>
+    </div>
+    <ul style="margin: 6px 0; padding-left: 18px; font-size: 12px;">
+      <li><strong>Static Nested Class (<code>ParkingLot.ParkingStatistics</code>):</strong> Independent analytical helper class. Can be instantiated without creating an outer <code>ParkingLot</code> instance.</li>
+      <li><strong>Non-Static Inner Class (<code>ParkingLot.SlotManager</code>):</strong> Tightly coupled to an enclosing <code>ParkingLot</code> instance with direct access to private <code>parkingGrid</code>.</li>
+    </ul>
+  </div>
+
+  <!-- Multithreading & Synchronization -->
+  <div class="concept-card">
+    <div class="concept-title">
+      <span>8. Multithreading, Synchronization &amp; wait() / notifyAll()</span>
+      <span class="concept-loc">threads/ParkingMonitor.java, ReportGenerator.java, ParkingRequestQueue.java</span>
+    </div>
+    <ul style="margin: 6px 0; padding-left: 18px; font-size: 12px;">
+      <li><strong>Extending Thread:</strong> <code>ParkingMonitor extends Thread</code> with <code>setDaemon(true)</code> and safe shutdown via <code>volatile boolean running</code>.</li>
+      <li><strong>Implementing Runnable:</strong> <code>ReportGenerator implements Runnable</code> + <code>thread.join()</code>.</li>
+      <li><strong>Synchronized Block:</strong> <code>synchronized(slotAllocationLock) { assignedSlot.occupy(); }</code> prevents race conditions when concurrent booking requests arrive.</li>
+      <li><strong>wait() &amp; notifyAll():</strong> Inside <code>ParkingRequestQueue</code>, waiting threads call <code>wait()</code> until a vehicle leaves and triggers <code>notifyAll()</code>.</li>
+    </ul>
+  </div>
+
+  <!-- File Streams -->
+  <div class="concept-card">
+    <div class="concept-title">
+      <span>9. File I/O Streams (Character vs Byte Streams)</span>
+      <span class="concept-loc">io/ParkingReportWriter.java &amp; io/ParkingBackupManager.java</span>
+    </div>
+    <ul style="margin: 6px 0; padding-left: 18px; font-size: 12px;">
+      <li><strong>Character Streams:</strong> <code>FileWriter</code> + <code>BufferedWriter</code> + <code>try-with-resources</code> to export human-readable <code>parking_history.txt</code> reports.</li>
+      <li><strong>Byte Streams (Binary):</strong> <code>FileOutputStream</code> + <code>BufferedOutputStream</code> to serialize raw binary snapshots into <code>parking_backup.dat</code>.</li>
+    </ul>
+  </div>
+
+  <!-- Part 3: Cheat Sheet Table -->
+  <div class="section-title">Part 3: Complete Viva Code Map</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Concept</th>
+        <th style="width: 35%;">Java File Location</th>
+        <th style="width: 40%;">Key Implementation Highlight</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Abstraction</strong></td>
+        <td><code>model/Vehicle.java</code></td>
+        <td><code>public abstract class Vehicle</code> with abstract fee method</td>
+      </tr>
+      <tr>
+        <td><strong>Encapsulation</strong></td>
+        <td><code>model/Vehicle.java</code>, <code>ParkingSlot.java</code></td>
+        <td>Private fields, validated getters/setters</td>
+      </tr>
+      <tr>
+        <td><strong>Multilevel Inheritance</strong></td>
+        <td><code>Vehicle &rarr; TwoWheeler &rarr; Bike</code></td>
+        <td>3-tier tree reusing code via <code>super()</code></td>
+      </tr>
+      <tr>
+        <td><strong>Hierarchical Inheritance</strong></td>
+        <td><code>Vehicle &rarr; FourWheeler &rarr; Car, Truck</code></td>
+        <td>Branched subclasses sharing four-wheeler attributes</td>
+      </tr>
+      <tr>
+        <td><strong>Runtime Polymorphism</strong></td>
+        <td><code>service/ParkingService.java#L164</code></td>
+        <td>Dynamic dispatch calling overridden fee logic</td>
+      </tr>
+      <tr>
+        <td><strong>Method Overloading</strong></td>
+        <td><code>Vehicle.java</code>, <code>ParkingLot.java</code></td>
+        <td>Overloaded fee calculation &amp; slot search signatures</td>
+      </tr>
+      <tr>
+        <td><strong>Interfaces &amp; Defaults</strong></td>
+        <td><code>interfaces/PrintableReceipt.java</code></td>
+        <td>Interface contract with Java 8 <code>default</code> footer</td>
+      </tr>
+      <tr>
+        <td><strong>2D Array Grid</strong></td>
+        <td><code>model/ParkingLot.java#L28</code></td>
+        <td><code>ParkingSlot[totalFloors][slotsPerFloor]</code></td>
+      </tr>
+      <tr>
+        <td><strong>Recursion</strong></td>
+        <td><code>model/ParkingLot.java#L88-118</code></td>
+        <td><code>searchGridRecursively()</code> with base cases</td>
+      </tr>
+      <tr>
+        <td><strong>Nested &amp; Inner Classes</strong></td>
+        <td><code>model/ParkingLot.java#L244-340</code></td>
+        <td>Static <code>ParkingStatistics</code> vs Inner <code>SlotManager</code></td>
+      </tr>
+      <tr>
+        <td><strong>Thread vs Runnable</strong></td>
+        <td><code>threads/ParkingMonitor</code> &amp; <code>ReportGenerator</code></td>
+        <td><code>Thread</code> extension vs <code>Runnable</code> with <code>join()</code></td>
+      </tr>
+      <tr>
+        <td><strong>Synchronization</strong></td>
+        <td><code>service/ParkingService.java#L93</code></td>
+        <td><code>synchronized(lock)</code> prevents concurrent race conditions</td>
+      </tr>
+      <tr>
+        <td><strong>wait() &amp; notifyAll()</strong></td>
+        <td><code>threads/ParkingRequestQueue.java</code></td>
+        <td>Thread suspension and event wakeup signaling</td>
+      </tr>
+      <tr>
+        <td><strong>File Handling (Char/Byte)</strong></td>
+        <td><code>io/ParkingReportWriter</code> &amp; <code>BackupManager</code></td>
+        <td><code>FileWriter</code> text vs <code>FileOutputStream</code> binary</td>
+      </tr>
+      <tr>
+        <td><strong>Checked Exceptions</strong></td>
+        <td><code>exception/ParkingLotFullException.java</code></td>
+        <td>Subclasses <code>Exception</code> requiring <code>throws</code> clause</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Part 4: Top 5 Trick Viva Questions -->
+  <div class="section-title">Part 4: Top 5 Viva Questions &amp; Answers</div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q1. Is Java Pass-by-Reference or Pass-by-Value?</div>
+    <div class="qa-a"><strong>Answer:</strong> Java is strictly <strong>Pass-by-Value</strong> at all times. When passing primitives, a copy of the value is passed. When passing object references, a copy of the reference address pointer is passed by value. Reassigning the pointer inside the method doesn't change the caller's reference, but mutating properties through that pointer does. (Demonstrated in <code>demo/ArgumentPassingDemo.java</code>).</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q2. What is the difference between Thread's start() and run()?</div>
+    <div class="qa-a"><strong>Answer:</strong> Calling <code>run()</code> executes the code synchronously in the current thread like a standard method call. Calling <code>start()</code> instructs the JVM and OS to allocate a new call stack and launch a distinct background thread of execution. (Demonstrated in <code>threads/ParkingMonitor.java</code>).</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q3. Why use try-with-resources instead of explicit finally blocks?</div>
+    <div class="qa-a"><strong>Answer:</strong> Any class implementing <code>AutoCloseable</code> (e.g. <code>FileWriter</code> or <code>FileOutputStream</code>) is guaranteed to close cleanly upon block exit, even if unexpected exceptions occur, preventing file lock and memory leaks. (Demonstrated in <code>io/ParkingReportWriter.java</code>).</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q4. Can an Abstract Class have a constructor?</div>
+    <div class="qa-a"><strong>Answer:</strong> Yes! <code>Vehicle</code> has constructors. While you cannot instantiate it directly via <code>new Vehicle()</code>, its constructor is invoked by subclass constructors via <code>super()</code> to initialize common properties like vehicle number and timestamp.</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q5. Why is the payment collection on the Admin/Operator screen?</div>
+    <div class="qa-a"><strong>Answer:</strong> In real parking facilities, drivers do not access database systems directly. The exit boom barrier has an operator booth terminal where the attendant verifies the vehicle, states the calculated tariff, collects payment (Cash/UPI/Card), records the transaction in MySQL, prints the tax receipt, and releases the slot.</div>
+  </div>
+
+  <div class="footer">
+    Vehicle Parking Management System &bull; Java 21 &bull; Spring Boot &bull; MySQL &bull; Prepared for Academic Evaluation
+  </div>
+
+</body>
+</html>

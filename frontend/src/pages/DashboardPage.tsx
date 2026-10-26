@@ -12,6 +12,8 @@ import {
   CreditCard,
   RefreshCw,
   TrendingUp,
+  Sparkles,
+  Zap,
 } from 'lucide-react';
 import {
   AreaChart,
@@ -29,7 +31,7 @@ import {
 import { api } from '../services/api';
 import { DashboardStats } from '../types';
 
-const COLORS = ['#7c3aed', '#a855f7', '#c084fc', '#38bdf8'];
+const COLORS = ['#8b5cf6', '#d946ef', '#06b6d4', '#10b981'];
 
 export const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
@@ -60,9 +62,12 @@ export const DashboardPage: React.FC = () => {
   if (loading && !stats) {
     return (
       <div className="p-8 flex items-center justify-center min-h-[60vh]">
-        <div className="flex flex-col items-center gap-3 text-slate-500">
-          <RefreshCw className="w-8 h-8 animate-spin text-purple-600" />
-          <p className="text-xs font-semibold text-purple-900">Connecting to Spring Boot REST API...</p>
+        <div className="flex flex-col items-center gap-3">
+          <div className="relative">
+            <div className="absolute inset-0 bg-violet-600/30 rounded-full blur-xl animate-pulse"></div>
+            <RefreshCw className="w-8 h-8 animate-spin text-fuchsia-400 relative z-10" />
+          </div>
+          <p className="text-xs font-semibold text-violet-300 tracking-wider">Connecting to Spring Boot REST API...</p>
         </div>
       </div>
     );
@@ -78,11 +83,19 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto">
       {/* Top Banner with Quick Actions */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5">
+      <div className="glass-panel p-5 sm:p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Facility Overview</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Real-time occupancy tracking, billing, and session analytics
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl md:text-2xl font-display font-extrabold text-white tracking-wide">
+              Facility Command Center
+            </h1>
+            <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 text-[10px] font-bold">
+              <Zap className="w-3 h-3 text-cyan-400 animate-pulse" />
+              <span>LIVE</span>
+            </span>
+          </div>
+          <p className="text-xs text-violet-300/80 mt-1 font-medium">
+            Real-time occupancy tracking, dynamic fee computation, and continuous telemetry
           </p>
         </div>
 
@@ -90,29 +103,29 @@ export const DashboardPage: React.FC = () => {
           <button
             onClick={fetchStats}
             title="Refresh Live Data"
-            className="p-2 rounded-xl border border-purple-200 text-purple-700 hover:bg-purple-50 transition-colors"
+            className="p-2.5 rounded-xl border border-violet-500/30 bg-violet-950/40 text-violet-200 hover:text-white hover:bg-violet-900/40 hover:border-violet-400/50 transition-all shadow-sm"
           >
-            <RefreshCw className="w-4 h-4" />
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-cyan-400' : ''}`} />
           </button>
           <button
             onClick={() => navigate('/park')}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-sm shadow-purple-500/25 transition-all"
+            className="btn-ethereal flex items-center gap-2 px-4 py-2.5 text-xs font-bold tracking-wide"
           >
-            <PlusCircle className="w-4 h-4" />
+            <PlusCircle className="w-4 h-4 text-cyan-300" />
             <span>Park Vehicle</span>
           </button>
           <button
             onClick={() => navigate('/checkout')}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-semibold shadow-sm shadow-emerald-500/20 transition-all"
+            className="btn-emerald-glow flex items-center gap-2 px-4 py-2.5 text-xs font-bold tracking-wide"
           >
-            <CreditCard className="w-4 h-4" />
+            <CreditCard className="w-4 h-4 text-emerald-200" />
             <span>Checkout</span>
           </button>
         </div>
       </div>
 
       {error && (
-        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium">
+        <div className="p-4 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs font-medium shadow-glow-rose">
           {error}
         </div>
       )}
@@ -120,88 +133,96 @@ export const DashboardPage: React.FC = () => {
       {/* KPI Metric Cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Total Slots */}
-        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
+        <div className="glass-panel-interactive p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Total Slots</span>
-            <div className="p-1.5 rounded-lg bg-purple-50 text-purple-600">
+            <span className="text-[10px] font-bold text-violet-300/70 uppercase tracking-widest">Total Slots</span>
+            <div className="p-2 rounded-xl bg-violet-500/15 text-violet-300 border border-violet-500/30 shadow-[0_0_10px_rgba(139,92,246,0.2)]">
               <Grid className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2">
-            <span className="text-2xl font-black text-slate-900">{stats?.totalSlots ?? 0}</span>
-            <span className="text-[11px] text-slate-400 block mt-0.5">Capacity across floors</span>
+          <div className="mt-3">
+            <span className="text-2xl md:text-3xl font-display font-black text-white">{stats?.totalSlots ?? 0}</span>
+            <span className="text-[11px] text-violet-300/60 block mt-0.5">Capacity across bays</span>
           </div>
         </div>
 
         {/* Available Slots */}
-        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
+        <div className="glass-panel-interactive p-4 flex flex-col justify-between border-emerald-500/25 hover:border-emerald-400/50">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Available</span>
-            <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
+            <span className="text-[10px] font-bold text-emerald-400/80 uppercase tracking-widest">Available</span>
+            <div className="p-2 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-[0_0_10px_rgba(16,185,129,0.25)]">
               <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2">
-            <span className="text-2xl font-black text-emerald-600">{stats?.availableSlots ?? 0}</span>
-            <span className="text-[11px] text-slate-400 block mt-0.5">Ready for parking</span>
+          <div className="mt-3">
+            <span className="text-2xl md:text-3xl font-display font-black text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+              {stats?.availableSlots ?? 0}
+            </span>
+            <span className="text-[11px] text-emerald-300/60 block mt-0.5">Ready for entry</span>
           </div>
         </div>
 
         {/* Occupied Slots */}
-        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
+        <div className="glass-panel-interactive p-4 flex flex-col justify-between border-rose-500/25 hover:border-rose-400/50">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Occupied</span>
-            <div className="p-1.5 rounded-lg bg-amber-50 text-amber-600">
+            <span className="text-[10px] font-bold text-rose-400/80 uppercase tracking-widest">Occupied</span>
+            <div className="p-2 rounded-xl bg-rose-500/15 text-rose-300 border border-rose-500/30 shadow-[0_0_10px_rgba(244,63,94,0.25)]">
               <Car className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2">
-            <span className="text-2xl font-black text-amber-600">{stats?.occupiedSlots ?? 0}</span>
-            <span className="text-[11px] text-slate-400 block mt-0.5">
+          <div className="mt-3">
+            <span className="text-2xl md:text-3xl font-display font-black text-rose-400 drop-shadow-[0_0_10px_rgba(244,63,94,0.3)]">
+              {stats?.occupiedSlots ?? 0}
+            </span>
+            <span className="text-[11px] text-rose-300/60 block mt-0.5">
               {stats?.occupancyRatePercentage ?? 0}% occupancy
             </span>
           </div>
         </div>
 
         {/* Vehicles Parked Today */}
-        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
+        <div className="glass-panel-interactive p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Parked Today</span>
-            <div className="p-1.5 rounded-lg bg-purple-50 text-purple-600">
+            <span className="text-[10px] font-bold text-violet-300/70 uppercase tracking-widest">Parked Today</span>
+            <div className="p-2 rounded-xl bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30 shadow-[0_0_10px_rgba(217,70,239,0.2)]">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2">
-            <span className="text-2xl font-black text-slate-900">{stats?.vehiclesParkedToday ?? 0}</span>
-            <span className="text-[11px] text-slate-400 block mt-0.5">Entries recorded today</span>
+          <div className="mt-3">
+            <span className="text-2xl md:text-3xl font-display font-black text-white">{stats?.vehiclesParkedToday ?? 0}</span>
+            <span className="text-[11px] text-violet-300/60 block mt-0.5">Sessions logged</span>
           </div>
         </div>
 
         {/* Active Sessions */}
-        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
+        <div className="glass-panel-interactive p-4 flex flex-col justify-between border-cyan-500/25 hover:border-cyan-400/50">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Active Parked</span>
-            <div className="p-1.5 rounded-lg bg-violet-100 text-violet-700">
+            <span className="text-[10px] font-bold text-cyan-400/80 uppercase tracking-widest">Active Parked</span>
+            <div className="p-2 rounded-xl bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 shadow-[0_0_10px_rgba(6,182,212,0.25)]">
               <Clock className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2">
-            <span className="text-2xl font-black text-violet-700">{stats?.activeSessions ?? 0}</span>
-            <span className="text-[11px] text-slate-400 block mt-0.5">Currently inside</span>
+          <div className="mt-3">
+            <span className="text-2xl md:text-3xl font-display font-black text-cyan-400 drop-shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+              {stats?.activeSessions ?? 0}
+            </span>
+            <span className="text-[11px] text-cyan-300/60 block mt-0.5">Inside bays</span>
           </div>
         </div>
 
         {/* Today's Revenue */}
-        <div className="bg-white p-4 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 hover:border-purple-200 transition-all">
+        <div className="glass-panel-interactive p-4 flex flex-col justify-between border-violet-500/30">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Today Revenue</span>
-            <div className="p-1.5 rounded-lg bg-purple-50 text-purple-700">
+            <span className="text-[10px] font-bold text-violet-300/70 uppercase tracking-widest">Today Revenue</span>
+            <div className="p-2 rounded-xl bg-gradient-to-br from-violet-600/30 to-fuchsia-600/30 text-fuchsia-300 border border-violet-500/40">
               <IndianRupee className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2">
-            <span className="text-2xl font-black text-purple-900">₹{stats?.todayRevenue?.toFixed(0) ?? 0}</span>
-            <span className="text-[11px] text-slate-400 block mt-0.5">
+          <div className="mt-3">
+            <span className="text-2xl md:text-3xl font-display font-black bg-gradient-to-r from-violet-200 via-fuchsia-200 to-cyan-200 bg-clip-text text-transparent">
+              ₹{stats?.todayRevenue?.toFixed(0) ?? 0}
+            </span>
+            <span className="text-[11px] text-violet-300/60 block mt-0.5">
               Total: ₹{stats?.totalRevenue?.toFixed(0) ?? 0}
             </span>
           </div>
@@ -211,14 +232,17 @@ export const DashboardPage: React.FC = () => {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Revenue Over Time (Area Chart) */}
-        <div className="lg:col-span-2 bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
+        <div className="lg:col-span-2 glass-panel p-5 md:p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">7-Day Revenue Trend</h3>
-              <p className="text-[11px] text-slate-500">Daily parking collections in INR (₹)</p>
+              <h3 className="text-sm md:text-base font-display font-bold text-white tracking-wide">
+                7-Day Revenue Velocity
+              </h3>
+              <p className="text-[11px] text-violet-300/70">Daily parking collections in INR (₹)</p>
             </div>
-            <div className="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200">
-              Live DB Aggregation
+            <div className="text-[11px] font-semibold text-cyan-300 bg-cyan-950/40 px-3 py-1 rounded-xl border border-cyan-500/30 shadow-[0_0_10px_rgba(6,182,212,0.15)] flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+              <span>SQL Aggregation</span>
             </div>
           </div>
 
@@ -227,45 +251,55 @@ export const DashboardPage: React.FC = () => {
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={stats.weeklyRevenue} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
-                    <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#9333ea" stopOpacity={0.35} />
-                      <stop offset="95%" stopColor="#9333ea" stopOpacity={0.0} />
+                    <linearGradient id="etherealRevenueGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.6} />
+                      <stop offset="50%" stopColor="#d946ef" stopOpacity={0.25} />
+                      <stop offset="95%" stopColor="#06b6d4" stopOpacity={0.0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f3e8ff" />
-                  <XAxis dataKey="date" stroke="#a855f7" fontSize={11} tickLine={false} />
-                  <YAxis stroke="#a855f7" fontSize={11} tickLine={false} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#25164a" vertical={false} />
+                  <XAxis dataKey="date" stroke="#a78bfa" fontSize={11} tickLine={false} />
+                  <YAxis stroke="#a78bfa" fontSize={11} tickLine={false} />
                   <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'rgba(15, 8, 35, 0.95)',
+                      backdropFilter: 'blur(16px)',
+                      borderColor: 'rgba(139, 92, 246, 0.4)',
+                      borderRadius: '12px',
+                      color: '#ffffff',
+                      boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)',
+                    }}
                     formatter={(val: any) => [`₹${Number(val || 0).toFixed(2)}`, 'Revenue']}
-                    labelStyle={{ fontWeight: 'bold', color: '#581c87' }}
-                    contentStyle={{ borderRadius: '14px', border: '1px solid #e9d5ff', boxShadow: '0 4px 20px -2px rgba(147, 51, 234, 0.1)' }}
+                    labelStyle={{ fontWeight: 'bold', color: '#c084fc' }}
                   />
                   <Area
                     type="monotone"
                     dataKey="revenue"
-                    stroke="#7c3aed"
+                    stroke="#c084fc"
                     strokeWidth={2.5}
                     fillOpacity={1}
-                    fill="url(#revenueGradient)"
+                    fill="url(#etherealRevenueGradient)"
                   />
                 </AreaChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-full flex items-center justify-center text-xs text-slate-400">
-                No revenue records available yet
+              <div className="h-full flex items-center justify-center text-xs text-violet-300/50">
+                No revenue records captured for past 7 days.
               </div>
             )}
           </div>
         </div>
 
-        {/* Vehicle Distribution (Pie Chart) */}
-        <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
+        {/* Vehicle Type Distribution (Pie Chart) */}
+        <div className="glass-panel p-5 md:p-6 space-y-4 flex flex-col justify-between">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">Slot Distribution</h3>
-            <p className="text-[11px] text-slate-500">Breakdown by vehicle hierarchy type</p>
+            <h3 className="text-sm md:text-base font-display font-bold text-white tracking-wide">
+              Vehicle Distribution
+            </h3>
+            <p className="text-[11px] text-violet-300/70">Breakdown by OOP subclass (Car, Bike, Truck)</p>
           </div>
 
-          <div className="h-64 w-full flex items-center justify-center">
+          <div className="h-52 w-full flex items-center justify-center">
             {pieData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -273,124 +307,145 @@ export const DashboardPage: React.FC = () => {
                     data={pieData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={55}
-                    outerRadius={80}
-                    paddingAngle={4}
+                    innerRadius={50}
+                    outerRadius={75}
+                    paddingAngle={5}
                     dataKey="value"
                   >
                     {pieData.map((_, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip />
-                  <Legend iconType="circle" wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'rgba(15, 8, 35, 0.95)',
+                      backdropFilter: 'blur(16px)',
+                      borderColor: 'rgba(139, 92, 246, 0.4)',
+                      borderRadius: '12px',
+                      color: '#ffffff',
+                    }}
+                  />
+                  <Legend
+                    verticalAlign="bottom"
+                    iconType="circle"
+                    formatter={(val) => <span className="text-xs font-semibold text-violet-200">{val}</span>}
+                  />
                 </PieChart>
               </ResponsiveContainer>
             ) : (
-              <div className="text-xs text-slate-400">No slot data</div>
+              <div className="text-xs text-violet-300/50">No vehicle data recorded yet.</div>
             )}
+          </div>
+
+          <div className="p-3 bg-violet-950/40 rounded-xl border border-violet-500/20 text-[11px] text-violet-300/80">
+            <span className="font-bold text-white block">OOP Model:</span>
+            Polymorphic instances deriving from abstract <code>Vehicle.java</code>
           </div>
         </div>
       </div>
 
-      {/* Activity Logs & Quick Navigation */}
+      {/* Activity and Quick Actions Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent Activity Feed */}
-        <div className="lg:col-span-2 bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-purple-100/60">
+        {/* Recent Activity Log */}
+        <div className="lg:col-span-2 glass-panel p-5 md:p-6 space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-violet-500/15">
             <div className="flex items-center gap-2">
-              <Activity className="w-4 h-4 text-purple-600" />
-              <h3 className="text-sm font-bold text-slate-900">Live Activity Feed</h3>
+              <Activity className="w-4 h-4 text-cyan-400" />
+              <h3 className="text-sm md:text-base font-display font-bold text-white tracking-wide">
+                Live Audit Activity Feed
+              </h3>
             </div>
-            <span className="text-[11px] text-slate-400 font-medium">Logged in MySQL table</span>
+            <span className="text-[11px] font-semibold text-violet-300/60">Persistent in MySQL Ledger</span>
           </div>
 
-          <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
+          <div className="space-y-2.5 max-h-72 overflow-y-auto pr-1">
             {stats?.recentActivities && stats.recentActivities.length > 0 ? (
               stats.recentActivities.map((act) => (
                 <div
                   key={act.logId}
-                  className="flex items-start justify-between gap-3 p-3 rounded-xl bg-purple-50/30 hover:bg-purple-50/70 transition-colors border border-purple-100/60"
+                  className="flex items-start justify-between gap-3 p-3 rounded-xl bg-violet-950/30 hover:bg-violet-950/60 transition-all border border-violet-500/20"
                 >
                   <div className="flex items-start gap-2.5">
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-bold shrink-0 mt-0.5 ${
+                      className={`px-2 py-0.5 rounded-md text-[10px] font-bold shrink-0 mt-0.5 border ${
                         act.activityType === 'PARK'
-                          ? 'bg-purple-100 text-purple-700 border border-purple-200'
+                          ? 'bg-violet-500/20 text-violet-300 border-violet-500/40 shadow-[0_0_8px_rgba(139,92,246,0.2)]'
                           : act.activityType === 'CHECKOUT'
-                          ? 'bg-emerald-100 text-emerald-700 border border-emerald-200'
-                          : 'bg-slate-200 text-slate-700'
+                          ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-[0_0_8px_rgba(16,185,129,0.2)]'
+                          : 'bg-slate-700/30 text-slate-300 border-slate-600/40'
                       }`}
                     >
                       {act.activityType}
                     </span>
-                    <p className="text-xs text-slate-700 font-medium leading-relaxed">{act.description}</p>
+                    <p className="text-xs text-violet-100 font-medium leading-relaxed">{act.description}</p>
                   </div>
-                  <span className="text-[10px] text-slate-400 shrink-0 font-mono">
+                  <span className="text-[10px] text-violet-300/50 shrink-0 font-mono">
                     {new Date(act.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>
               ))
             ) : (
-              <div className="text-center py-8 text-xs text-slate-400">No recent activity logs found.</div>
+              <div className="text-center py-8 text-xs text-violet-300/50">No recent activity logs found.</div>
             )}
           </div>
         </div>
 
         {/* Quick Navigation Cards */}
-        <div className="bg-white p-5 rounded-2xl border border-purple-100/80 shadow-sm shadow-purple-500/5 space-y-4 flex flex-col justify-between">
+        <div className="glass-panel p-5 md:p-6 space-y-4 flex flex-col justify-between">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">Quick Navigation</h3>
-            <p className="text-[11px] text-slate-500 mt-0.5">Fast shortcuts for live demonstration</p>
+            <h3 className="text-sm md:text-base font-display font-bold text-white tracking-wide">
+              Quick Portals
+            </h3>
+            <p className="text-[11px] text-violet-300/70 mt-0.5">Shortcuts for viva presentation & navigation</p>
 
             <div className="space-y-2.5 mt-4">
               <button
                 onClick={() => navigate('/parking-lot')}
-                className="w-full flex items-center justify-between p-3 rounded-xl border border-purple-100 hover:border-purple-300 hover:bg-purple-50/50 transition-all text-left"
+                className="w-full flex items-center justify-between p-3 rounded-xl border border-violet-500/20 bg-violet-950/20 hover:bg-violet-900/40 hover:border-violet-400/50 transition-all text-left group"
               >
                 <div className="flex items-center gap-2.5">
-                  <Grid className="w-4 h-4 text-purple-600" />
+                  <Grid className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
                   <div>
-                    <span className="text-xs font-bold text-slate-800 block">Visual Parking Grid</span>
-                    <span className="text-[11px] text-slate-500">2D array representation</span>
+                    <span className="text-xs font-bold text-white block">Visual Parking Grid</span>
+                    <span className="text-[11px] text-violet-300/60">2D matrix spatial floorplan</span>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-purple-400" />
+                <ArrowUpRight className="w-4 h-4 text-violet-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
 
               <button
                 onClick={() => navigate('/history')}
-                className="w-full flex items-center justify-between p-3 rounded-xl border border-purple-100 hover:border-purple-300 hover:bg-purple-50/50 transition-all text-left"
+                className="w-full flex items-center justify-between p-3 rounded-xl border border-violet-500/20 bg-violet-950/20 hover:bg-violet-900/40 hover:border-violet-400/50 transition-all text-left group"
               >
                 <div className="flex items-center gap-2.5">
-                  <Clock className="w-4 h-4 text-purple-600" />
+                  <Clock className="w-4 h-4 text-fuchsia-400 group-hover:scale-110 transition-transform" />
                   <div>
-                    <span className="text-xs font-bold text-slate-800 block">Audit Parking History</span>
-                    <span className="text-[11px] text-slate-500">Filter, search & print receipts</span>
+                    <span className="text-xs font-bold text-white block">Audit Parking Ledger</span>
+                    <span className="text-[11px] text-violet-300/60">Filter, search & print slips</span>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-purple-400" />
+                <ArrowUpRight className="w-4 h-4 text-violet-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
 
               <button
-                onClick={() => navigate('/viva-demos')}
-                className="w-full flex items-center justify-between p-3 rounded-xl border border-purple-200 bg-purple-50/70 hover:bg-purple-100/70 transition-all text-left"
+                onClick={() => navigate('/reports')}
+                className="w-full flex items-center justify-between p-3 rounded-xl border border-emerald-500/20 bg-emerald-950/20 hover:bg-emerald-900/30 hover:border-emerald-400/50 transition-all text-left group"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-purple-600"></span>
+                  <Sparkles className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
                   <div>
-                    <span className="text-xs font-bold text-purple-950 block">CSC2104 OOP Viva Demos</span>
-                    <span className="text-[11px] text-purple-700">Threads, pass-by-value & GC</span>
+                    <span className="text-xs font-bold text-white block">Export & Reports</span>
+                    <span className="text-[11px] text-emerald-300/60">File I/O & binary snapshots</span>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-purple-700" />
+                <ArrowUpRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
             </div>
           </div>
 
-          <div className="p-3 bg-purple-50/60 rounded-xl border border-purple-100 text-[11px] text-purple-800">
-            <span className="font-semibold text-purple-950 block">Backend Multithreading:</span>
-            ParkingMonitor (Thread) & SessionAuditWorker (Runnable) are running in background.
+          <div className="p-3 bg-violet-950/40 rounded-xl border border-violet-500/20 text-[11px] text-violet-200/80">
+            <span className="font-bold text-white block">Multithreaded Daemon:</span>
+            <code>ParkingSlotMonitorThread</code> runs continuously in the Spring Boot JVM.
           </div>
         </div>
       </div>
